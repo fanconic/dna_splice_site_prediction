@@ -2,7 +2,6 @@
 from imblearn.over_sampling import RandomOverSampler, SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
 import pandas as pd
 
 import src.data.utils
@@ -71,8 +70,3 @@ def string_transform_hash(train_X, val_X):
   new_df_val = pd.DataFrame.from_dict(tmp, orient='index')
 
   return new_df_train, new_df_val
-
-
-def random_split(data_obj):
-  X_train, X_test, y_train, y_test = train_test_split(data_obj.x, data_obj.y, test_size=0.2, random_state=42)
-  return X_train, X_test, y_train, y_test

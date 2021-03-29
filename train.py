@@ -2,7 +2,6 @@ import torch
 import numpy as np
 import pandas as pd
 import torch.utils.data as data
-from sklearn.ensemble import RandomForestClassifier
 
 from settings import (
 	data_path,
@@ -22,11 +21,12 @@ from src.data.loader import DataLoader_sk
 
 
 # TODO implement pipelines
-# TODO scores
 # TODO model configs in settings
 # TODO comments & readme
+# TODO saving & loading models
 
 
+#SAMPLE CODE
 
 # loading data
 
@@ -51,3 +51,4 @@ k_nn.clf.fit(train_x, train_y)
 predictions = k_nn.clf.predict(test_x)
 
 utils.model_eval(predictions, test_y)
+
