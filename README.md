@@ -22,8 +22,9 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 ```
 .
 └── src                 # Source code for the experiments
-    ├── data                # Data loaders, preprocessing, helper functions
-    └── models              # All models used for our project          
+    ├── data            # Data loaders, preprocessing, helper functions
+    ├── models          # All models used for our project  
+    └── utils           # additional helper functions (e.g. model saver and loader)
 ```
 
 ### Source Code Directory Tree
