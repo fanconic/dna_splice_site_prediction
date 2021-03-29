@@ -6,18 +6,18 @@ import lightgbm
 
 # models: k_NN, Random Forest, SVM, Boosting, TODO regressor, ...
 
-class k_NN:
+class k_NN():
 	def __init__(self, n_neighbors=3):
-		clf = KNeighborsClassifier(n_neighbors=n_neighbors)
+		self.clf = KNeighborsClassifier(n_neighbors=n_neighbors)
 
-class random_forest:
+class random_forest():
 	def __init__(self, ):
-		clf =  RandomForestClassifier(n_estimators= 200, max_depth = max_depth, random_state=seed)
+		self.clf =  RandomForestClassifier(n_estimators= 200, max_depth = max_depth, random_state=seed)
 
-class SVM:
+class SVM():
 	def __init__(self):
-		clf = StandardScaler()
+		self.clf = StandardScaler()
 
-class Boosting:
+class Boosting():
 	def __init__(self):
-		clf = lightgbm.LGBMClassifier()
+		self.clf = lightgbm.LGBMClassifier()

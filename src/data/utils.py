@@ -6,11 +6,11 @@ def getKmers(sequence, size=6):
 def model_eval(predictions, ground_truth):
 	roc = roc_curve(ground_truth, predictions)
 	prec = precision_score(ground_truth, predictions)
-	roc_auc = roc_auc_score(ground_truth, predictions)
+	#roc_auc = roc_auc_score(ground_truth, predictions)
 	recall = recall_score(ground_truth, predictions)
-	auc_score = auc(ground_truth, predictions)
+	#auc_score = auc(ground_truth, predictions)
 
-
+	'''
 	print(
         "########### Precision : {}, Recall: {}, ROC: {}, AUROC: {}, AUPRC: {} ###########".format(
             prec,
@@ -20,4 +20,11 @@ def model_eval(predictions, ground_truth):
             auc_score
         )
     )
-
+    '''
+	print(
+        "########### Precision : {}, Recall: {}, ROC: {} ###########".format(
+            prec,
+            recall,
+            roc,
+        )
+    )

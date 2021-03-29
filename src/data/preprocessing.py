@@ -3,8 +3,9 @@ from imblearn.over_sampling import RandomOverSampler, SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+import pandas as pd
 
-from utils import getKmers
+import src.data.utils
 
 def under_sample(X, y, sample_perc):
   undersample = RandomUnderSampler(sampling_strategy=sample_perc)

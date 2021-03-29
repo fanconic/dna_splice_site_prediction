@@ -1,3 +1,6 @@
+import torch.utils.data as data
+import pandas as pd
+
 class DataLoader_torch(data.Dataset):
   
   def __init__(self, csv_file, transform=None, shuffle=False, downsample=False, upsample=False):
