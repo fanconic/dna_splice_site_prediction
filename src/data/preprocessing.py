@@ -7,18 +7,28 @@ import pandas as pd
 import src.data.utils
 
 def under_sample(X, y, sample_perc):
+  ''' randomly undersample the majority class
+
+  '''
   undersample = RandomUnderSampler(sampling_strategy=sample_perc)
   X_under, y_under = undersample.fit_resample(X, y)
   return X_under, y_under
 
 
 def over_sample(X, y, sample_perc):
+  ''' randomly oversample the minority class
+
+  '''
   oversample = RandomOverSampler(sampling_strategy=sample_perc)
   X_over, y_over = oversample.fit_resample(X, y)
   return X_over, y_over
 
 
 def over_under_sample(X, y, sample_strat_over, sample_strat_under):
+  ''' doing a mixture of over- and under-sampling
+
+  '''
+
   # oversampling
   over = RandomOverSampler(sampling_strategy=sample_strat_over)
   X_over, y_over = over.fit_resample(X, y)
@@ -29,6 +39,9 @@ def over_under_sample(X, y, sample_strat_over, sample_strat_under):
 
 
 def smote_sampling(X, y, sampling_strategy_perc=None):
+  ''' SMOTE, synthesizes new examples for the minority class
+
+  '''
   smote_sample = SMOTE() if sampling_strategy_perc==None else SMOTE(sampling_strategy=sampling_strategy_perc)
   X_transformed,y_transformed = smote_sample.fit_resample(X, y)
   return X_transformed, y_transformed
@@ -36,6 +49,9 @@ def smote_sampling(X, y, sampling_strategy_perc=None):
 
 
 def string_transform_labels(train_ds, val_ds):
+  ''' Encoding the sequence characters into a DataFrame of integers using label encoder
+
+  '''
   label_encoder = LabelEncoder()
   label_encoder.fit(['a','c','g','u'])
 
@@ -55,6 +71,9 @@ def string_transform_labels(train_ds, val_ds):
 
 
 def string_transform_hash(train_X, val_X):
+  ''' Encoding the sequence characters into a DataFrame of integers using a hash function
+
+  '''
   tmp = dict()
   for i in range(train_X.shape[0]):
     kmers = getKmers(train_X.iloc[0])
