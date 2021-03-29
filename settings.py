@@ -3,17 +3,18 @@ import getpass
 
 username = getpass.getuser()
 
-'''
 if "COLAB_GPU" in os.environ:
-    data_path = "/content/ml4h_proj1_colon_cancer_ct/"
-    out_dir = "/content/drive/MyDrive/ML4H/"
+    data_path = "/content/drive/My Drive/datasets/ML4H_p2/exercise_data/"
+    out_dir = "/content/drive/My Drive/datasets/ML4H_p2/"
     colab = True
+elif "SHELL" in os.environ:
+    data_path = "/home/manu/ethz_master/FS21/ML4H/project_2/exercise_data/"
+    out_dir = "/home/manu/ethz_master/FS21/ML4H/project_2/"
+    colab = False
 else:
     data_path = "/cluster/scratch/{}/ML4H/ML4H_proj_2/exercise_data/".format(username)
     out_dir = "/cluster/scratch/{}/ML4H/ML4H_proj_2/saved_models/".format(username)
     colab = False
-'''
-data_path = '/home/manu/ethz_master/FS21/ML4H/project_2/exercise_data/'
 
 # Dataset
 
