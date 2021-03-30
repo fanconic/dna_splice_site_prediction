@@ -5,7 +5,7 @@ def getKmers(sequence, size=6):
 	''' Splitting the sequence into k-mers of a specified size
 
 	'''
-    return [sequence[x:x+size].lower() for x in range(len(sequence) - size + 1)]
+	return [sequence[x:x+size].lower() for x in range(len(sequence) - size + 1)]
 
 
 def random_split(data_obj):

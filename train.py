@@ -10,7 +10,6 @@ from settings import (
 from src.data.preprocessing import (
 	string_transform_labels,
 	smote_sampling,
-	random_split
 	)
 
 import src.data.utils as utils
@@ -31,7 +30,7 @@ from src.data.loader import DataLoader_sk
 # loading data
 
 data_obj = DataLoader_sk(data_path+celegans_seq)
-train_x, test_x, train_y, test_y = random_split(data_obj)
+train_x, test_x, train_y, test_y = utils.random_split(data_obj)
 
 # transforming sequences to numerical values
 

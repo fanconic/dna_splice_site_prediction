@@ -10,12 +10,13 @@ from settings import (
 from src.data.preprocessing import (
 	string_transform_labels,
 	smote_sampling,
-	random_split
 	)
 
 import src.data.utils as utils
 
 from src.models.models import k_NN
+
+from src.data.loader import DataLoader_folds
 
 
 
