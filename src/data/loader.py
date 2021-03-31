@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold, StratifiedKFold
 
 
 class DataLoader_sk:
@@ -30,6 +30,11 @@ class DataLoader_folds:
                 lambda x: x.replace("T", "U")
             )
 
+        self.x = self.dataset["sequences"]
+        self.y = self.dataset["labels"]
+
         self.shuffle = shuffle
         self.numFolds = numFolds
-        self.kfold = KFold(n_splits=numFolds, shuffle=self.shuffle, random_state=42)
+        self.kfold = StratifiedKFold(
+            n_splits=numFolds, shuffle=self.shuffle, random_state=42
+        )

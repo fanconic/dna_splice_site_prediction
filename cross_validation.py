@@ -36,13 +36,13 @@ for name, model in models.items():
     print(name)
     auc_collect = []
     for fold, (train_idx, dev_idx) in enumerate(
-        kfold_obj.kfold.split(kfold_obj.dataset)
+        kfold_obj.kfold.split(kfold_obj.x, kfold_obj.y)
     ):
         # creating sets
-        train_x = kfold_obj.dataset["sequences"][train_idx]
-        train_y = kfold_obj.dataset["labels"][train_idx]
-        test_x = kfold_obj.dataset["sequences"][dev_idx]
-        test_y = kfold_obj.dataset["labels"][dev_idx]
+        train_x = kfold_obj.x[train_idx]
+        train_y = kfold_obj.y[train_idx]
+        test_x = kfold_obj.x[dev_idx]
+        test_y = kfold_obj.y[dev_idx]
 
         # data preprocessing
         # train_x, test_x = string_transform_onehot_char(train_x, test_x)
