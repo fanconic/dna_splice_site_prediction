@@ -36,12 +36,9 @@ n_neighbors = 3
 
 # Logistic Regression
 
-
 # Boosting
 
-
 # SVM
-
 
 # Random Forest
 max_depth = 10

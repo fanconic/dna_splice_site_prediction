@@ -36,12 +36,6 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 (└── saved_models)       # Saved models (not in repository - created upon first run)
 ```
 
-### Source Code Directory Tree
-
-
-## How to run on the Leonhard Cluster
-
-
 ## Prediction Files
 
 ## Contributors

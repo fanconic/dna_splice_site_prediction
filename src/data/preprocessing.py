@@ -1,33 +1,43 @@
 from imblearn.over_sampling import RandomOverSampler, SMOTE
 from imblearn.under_sampling import RandomUnderSampler
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import pandas as pd
 
 import src.data.utils
 
 
 def under_sample(X, y, sample_perc):
-    """ randomly undersample the majority class
-
-  """
+    """randomly undersample the majority class"""
     undersample = RandomUnderSampler(sampling_strategy=sample_perc)
     X_under, y_under = undersample.fit_resample(X, y)
     return X_under, y_under
 
 
 def over_sample(X, y, sample_perc):
-    """ randomly oversample the minority class
-
-  """
+    """randomly oversample the minority class"""
     oversample = RandomOverSampler(sampling_strategy=sample_perc)
     X_over, y_over = oversample.fit_resample(X, y)
     return X_over, y_over
 
 
-def over_under_sample(X, y, sample_strat_over, sample_strat_under):
-    """ doing a mixture of over- and under-sampling
+def onehot_encode(X):
+    """ Encode in One-Hot format
+    Args:
+        X (pandas.DataFrame): input splice in its original format 
+    Returns: 
+        One hot encoded splice data in np.array format
+    """
+    f = lambda x: list(x)
+    X = X.apply(f)
+    X = pd.DataFrame(X.values.tolist(), index=X.index)
+    enc = OneHotEncoder(handle_unknown="ignore")
+    enc.fit(X)
+    X_1h = enc.transform(X).toarray()
+    return X_1h
 
-  """
+
+def over_under_sample(X, y, sample_strat_over, sample_strat_under):
+    """doing a mixture of over- and under-sampling """
 
     # oversampling
     over = RandomOverSampler(sampling_strategy=sample_strat_over)
@@ -39,9 +49,7 @@ def over_under_sample(X, y, sample_strat_over, sample_strat_under):
 
 
 def smote_sampling(X, y, sampling_strategy_perc=None):
-    """ SMOTE, synthesizes new examples for the minority class
-
-  """
+    """ SMOTE, synthesizes new examples for the minority clas"""
     smote_sample = (
         SMOTE()
         if sampling_strategy_perc == None
@@ -52,9 +60,7 @@ def smote_sampling(X, y, sampling_strategy_perc=None):
 
 
 def string_transform_labels(train_ds, val_ds):
-    """ Encoding the sequence characters into a DataFrame of integers using label encoder
-
-  """
+    """ Encoding the sequence characters into a DataFrame of integers using label encoder"""
     label_encoder = LabelEncoder()
     label_encoder.fit(["a", "c", "g", "u"])
 
@@ -80,9 +86,7 @@ def string_transform_labels(train_ds, val_ds):
 
 
 def string_transform_hash(train_X, val_X):
-    """ Encoding the sequence characters into a DataFrame of integers using a hash function
-
-  """
+    """ Encoding the sequence characters into a DataFrame of integers using a hash function"""
     tmp = dict()
     for i in range(train_X.shape[0]):
         kmers = getKmers(train_X.iloc[0])

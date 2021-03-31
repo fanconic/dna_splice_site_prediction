@@ -40,7 +40,7 @@ def model_eval(predictions, ground_truth):
     auc_score = auc(fpr, tpr)
 
     print(
-        "########### Precision : {}, Recall: {}, F1: {}, AUROC: {}, AUPRC: {} ###########".format(
+        "########### Precision : {0:.4f}, Recall: {1:.4f}, F1: {2:.4f}, AUROC: {3:.4f}, AUPRC: {4:.4f} ###########".format(
             prec, recall, f1, roc_auc, auc_score
         )
     )
