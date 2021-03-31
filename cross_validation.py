@@ -5,6 +5,8 @@ from src.data.preprocessing import (
     string_transform_labels,
     string_transform_onehot_char,
     smote_sampling,
+    over_sample,
+    under_sample,
     onehot_encode,
 )
 import src.data.utils as utils
@@ -47,7 +49,8 @@ for name, model in models.items():
         train_x, test_x = onehot_encode(train_x), onehot_encode(test_x)
 
         # sampling
-        # train_x, train_y = smote_sampling(train_x, train_y)
+        train_x, train_y = under_sample(train_x, train_y, 1)
+        train_x, train_y = smote_sampling(train_x, train_y)
 
         # model training & testing
         model.fit(train_x, train_y)
