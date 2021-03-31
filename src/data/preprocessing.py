@@ -109,8 +109,9 @@ def string_transform_onehot_char(train_X, val_X):
     """ Transforming the sequence characters into a DataFrame of one-hot encodings (position dependent)
   
   """
+
     def split(x):
-      return list(x[0])
+        return list(x[0])
 
     train_tmp = np.apply_along_axis(split, 1, pd.DataFrame(train_X))
     train_X = pd.get_dummies(pd.DataFrame(train_tmp))
