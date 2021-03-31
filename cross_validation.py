@@ -4,6 +4,7 @@ import torch.utils.data as data
 from settings import data_path, celegans_seq
 from src.data.preprocessing import (
     string_transform_labels,
+    string_transform_onehot_char,
     smote_sampling,
 )
 import src.data.utils as utils
@@ -22,7 +23,8 @@ for fold, (train_idx, dev_idx) in enumerate(kfold_obj.kfold.split(kfold_obj.data
     test_y = kfold_obj.dataset["labels"][dev_idx]
 
     # data preprocessing
-    train_x, test_x = string_transform_labels(train_x, test_x)
+    #train_x, test_x = string_transform_labels(train_x, test_x)
+    train_x, test_x = string_transform_onehot_char(train_x, test_x)
 
     # sampling
     train_x, train_y = smote_sampling(train_x, train_y)

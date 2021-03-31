@@ -2,6 +2,7 @@ from imblearn.over_sampling import RandomOverSampler, SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.preprocessing import LabelEncoder
 import pandas as pd
+import numpy as np
 
 import src.data.utils
 
@@ -98,3 +99,19 @@ def string_transform_hash(train_X, val_X):
     new_df_val = pd.DataFrame.from_dict(tmp, orient="index")
 
     return new_df_train, new_df_val
+
+
+def string_transform_onehot_char(train_X, val_X):
+    """ Transforming the sequence characters into a DataFrame of one-hot encodings (position dependent)
+  
+  """
+    def split(x):
+      return list(x[0])
+
+    train_tmp = np.apply_along_axis(split, 1, pd.DataFrame(train_X))
+    train_X = pd.get_dummies(pd.DataFrame(train_tmp))
+
+    val_tmp = np.apply_along_axis(split, 1, pd.DataFrame(val_X))
+    val_X = pd.get_dummies(pd.DataFrame(val_tmp))
+
+    return train_X, val_X
