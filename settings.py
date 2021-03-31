@@ -5,13 +5,13 @@ username = getpass.getuser()
 
 # Google Colab
 if "COLAB_GPU" in os.environ:
-    data_path = "/content/drive/MyDrive/datasets/ML4H_p2/project2_data/"
+    data_path = "/content/drive/MyDrive/datasets/ML4H_p2/exercise_data/"
     out_dir = "/content/drive/My Drive/datasets/ML4H_p2/"
     colab = True
 
 # Personal Computer -> you might have to adjust the path
 else:
-    data_path = "./project2_data/"
+    data_path = "./exercise_data/"
     out_dir = "./saved_models"
     colab = False
 
