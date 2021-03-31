@@ -6,6 +6,7 @@ import torch.utils.data as data
 from settings import data_path, celegans_seq
 from src.data.preprocessing import (
     string_transform_labels,
+    string_transform_onehot_char,
     smote_sampling,
 )
 
@@ -29,7 +30,7 @@ train_x, test_x, train_y, test_y = utils.random_split(data_obj)
 
 # transforming sequences to numerical values
 
-train_x, test_x = string_transform_labels(train_x, test_x)
+train_x, test_x = string_transform_onehot_char(train_x, test_x)
 
 
 train_x, train_y = smote_sampling(train_x, train_y)

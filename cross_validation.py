@@ -3,6 +3,7 @@ import pandas as pd
 import torch.utils.data as data
 from src.data.preprocessing import (
     string_transform_labels,
+    string_transform_onehot_char,
     smote_sampling,
     onehot_encode,
 )
@@ -41,6 +42,7 @@ for name, model in models.items():
         test_y = kfold_obj.dataset["labels"][dev_idx]
 
         # data preprocessing
+        # train_x, test_x = string_transform_onehot_char(train_x, test_x)
         train_x, test_x = onehot_encode(train_x), onehot_encode(test_x)
 
         # sampling
