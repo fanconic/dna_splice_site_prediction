@@ -3,14 +3,11 @@ import numpy as np
 import pandas as pd
 import torch.utils.data as data
 
-from settings import (
-	data_path,
-	celegans_seq
-	)
+from settings import data_path, celegans_seq
 from src.data.preprocessing import (
-	string_transform_labels,
-	smote_sampling,
-	)
+    string_transform_labels,
+    smote_sampling,
+)
 
 import src.data.utils as utils
 
@@ -23,11 +20,11 @@ from src.data.loader import DataLoader_sk
 # TODO model configs in settings
 
 
-#SAMPLE CODE
+# SAMPLE CODE
 
 # loading data
 
-data_obj = DataLoader_sk(data_path+celegans_seq)
+data_obj = DataLoader_sk(data_path + celegans_seq)
 train_x, test_x, train_y, test_y = utils.random_split(data_obj)
 
 # transforming sequences to numerical values
@@ -48,4 +45,3 @@ k_nn.clf.fit(train_x, train_y)
 predictions = k_nn.clf.predict(test_x)
 
 utils.model_eval(predictions, test_y)
-

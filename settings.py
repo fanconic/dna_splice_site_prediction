@@ -27,11 +27,10 @@ hum_seq_val = "human_dna_validation_split.csv"
 # Preprocessing
 under_sampling_perc = 0.5
 over_sampling_perc = 0.2
-smote_strategy = None #None for balanced
+smote_strategy = None  # None for balanced
 
 
 # Boosting
-
 
 
 # SVM
@@ -39,7 +38,6 @@ smote_strategy = None #None for balanced
 
 # k-NN
 n_neighbors = 3
-
 
 
 # Random Forest

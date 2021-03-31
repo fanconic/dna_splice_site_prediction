@@ -35,6 +35,10 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 
 ## Prediction Files
 
+## Contributors
+- Manuel Studer - manstude@ethz.ch
+- Claudio Fanconi - fanconic@ethz.ch
+- Severin Husmann - shusmann@ethz.ch
 
 ## References
 - https://www.sciencedirect.com/science/article/pii/S0092867418316295
