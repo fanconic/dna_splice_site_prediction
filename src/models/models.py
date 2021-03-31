@@ -17,7 +17,7 @@ class k_NN:
     def __init__(self, n_neighbors=3):
         self.clf = KNeighborsClassifier(n_neighbors=n_neighbors)
 
-    def fit(train_x, train_y):
+    def fit(self, train_x, train_y):
         self.clf.fit(train_x, train_y)
 
 

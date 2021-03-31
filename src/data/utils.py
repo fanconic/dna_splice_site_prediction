@@ -1,4 +1,11 @@
-from sklearn.metrics import roc_curve, precision_score, roc_auc_score, recall_score, auc
+from sklearn.metrics import (
+    roc_curve,
+    precision_score,
+    roc_auc_score,
+    recall_score,
+    auc,
+    f1_score,
+)
 from sklearn.model_selection import train_test_split
 
 
@@ -28,12 +35,13 @@ def model_eval(predictions, ground_truth):
     )  # fpr: inc false positive rate; tpr: inc true positive rate
     prec = precision_score(ground_truth, predictions)
     recall = recall_score(ground_truth, predictions)
+    f1 = f1_score(ground_truth, predictions)
     roc_auc = roc_auc_score(ground_truth, predictions)
     auc_score = auc(fpr, tpr)
 
     print(
-        "########### Precision : {}, Recall: {}, AUROC: {}, AUPRC: {} ###########".format(
-            prec, recall, roc_auc, auc_score
+        "########### Precision : {}, Recall: {}, F1: {}, AUROC: {}, AUPRC: {} ###########".format(
+            prec, recall, f1, roc_auc, auc_score
         )
     )
 

@@ -1,26 +1,19 @@
-import torch
 import numpy as np
 import pandas as pd
 import torch.utils.data as data
-
 from settings import data_path, celegans_seq
 from src.data.preprocessing import (
     string_transform_labels,
     smote_sampling,
 )
-
 import src.data.utils as utils
-
-from src.models.models import k_NN
-
 from src.data.loader import DataLoader_folds
-
+from src.models.models import k_NN
 
 kfold_obj = DataLoader_folds(data_path + celegans_seq, 3)
 auc_collect = []
 
 # K_Fold iteration loop
-
 for fold, (train_idx, dev_idx) in enumerate(kfold_obj.kfold.split(kfold_obj.dataset)):
     # creating sets
     train_x = kfold_obj.dataset["sequences"][train_idx]

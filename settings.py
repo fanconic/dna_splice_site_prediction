@@ -3,21 +3,22 @@ import getpass
 
 username = getpass.getuser()
 
+# Google Colab
 if "COLAB_GPU" in os.environ:
-    data_path = "/content/drive/My Drive/datasets/ML4H_p2/exercise_data/"
+    data_path = "/content/drive/MyDrive/datasets/ML4H_p2/project2_data/"
     out_dir = "/content/drive/My Drive/datasets/ML4H_p2/"
     colab = True
-elif "SHELL" in os.environ:
-    data_path = "/home/manu/ethz_master/FS21/ML4H/project_2/exercise_data/"
-    out_dir = "/home/manu/ethz_master/FS21/ML4H/project_2/"
-    colab = False
+
+# Personal Computer -> you might have to adjust the path
 else:
-    data_path = "/cluster/scratch/{}/ML4H/ML4H_proj_2/exercise_data/".format(username)
-    out_dir = "/cluster/scratch/{}/ML4H/ML4H_proj_2/saved_models/".format(username)
+    data_path = "./project2_data/"
+    out_dir = "./saved_models"
     colab = False
+
+if not os.path.exists(out_dir):
+    os.makedirs(out_dir)
 
 # Dataset
-
 celegans_seq = "C_elegans_acc_seq.csv"
 hum_seq_hidden = "human_dna_test_hidden_split.csv"
 hum_seq_test = "human_dna_test_split.csv"
@@ -28,16 +29,18 @@ hum_seq_val = "human_dna_validation_split.csv"
 under_sampling_perc = 0.5
 over_sampling_perc = 0.2
 smote_strategy = None  # None for balanced
+onehot = True
+
+# k-NN
+n_neighbors = 3
+
+# Logistic Regression
 
 
 # Boosting
 
 
 # SVM
-
-
-# k-NN
-n_neighbors = 3
 
 
 # Random Forest
