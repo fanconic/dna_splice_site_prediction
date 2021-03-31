@@ -15,16 +15,25 @@ $ git clone https://github.com/fanconic/ML4H_project2.git
 $ cd ML4H_project2
 ```
 
+We suggest to create a virtual environment and install the required packages.
+```bash
+$ conda create -n test_env
+$ conda activate test_env
+$ pip install -r requirements.txt
+```
+
 ### Dataset
 The datasets have been provided to us via Moodle and is not publicly available. If you anyway would be interested in using it, please reach out to us in order to check if handing the data to you would be possible. The datasets originated from C. elegans (roundworm) and humans.
 
 ### Repository Structure
 ```
-.
-└── src                 # Source code for the experiments
-    ├── data            # Data loaders, preprocessing, helper functions
-    ├── models          # All models used for our project  
-    └── utils           # additional helper functions (e.g. model saver and loader)
+ .
+ ├── src                 # Source code for the experiments
+    ├── data                # Data loaders, preprocessing, helper functions
+    ├── models              # All models used for our project  
+    └── utils               # additional helper functions (e.g. model saver and loader)
+(├── exercise_data)      # Splice Site Data (not in repository - insert here) 
+(└── saved_models)       # Saved models (not in repository - created upon first run)
 ```
 
 ### Source Code Directory Tree
