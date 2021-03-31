@@ -21,6 +21,7 @@ from src.data.loader import DataLoader_folds
 
 
 kfold_obj = DataLoader_folds(data_path+celegans_seq, 3)
+auc_collect = []
 
 # K_Fold iteration loop
 
@@ -44,4 +45,6 @@ for fold, (train_idx, dev_idx) in enumerate(kfold_obj.kfold.split(kfold_obj.data
     predictions = pd.DataFrame(predictions).applymap(lambda x: 1 if (x>=0) else -1)
     
     print("### FOLD {} ###".format(fold))
-    utils.model_eval(predictions, test_y)
+    auc_collect.append(utils.model_eval(predictions, test_y))
+
+print("AUC mean: {}, std: +-{}".format(np.mean(auc_collect), np.std(auc_collect)))

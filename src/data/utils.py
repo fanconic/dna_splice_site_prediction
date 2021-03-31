@@ -35,3 +35,5 @@ def model_eval(predictions, ground_truth):
             auc_score
         )
     )
+
+	return auc_score

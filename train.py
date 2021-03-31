@@ -21,8 +21,6 @@ from src.data.loader import DataLoader_sk
 
 # TODO implement pipelines
 # TODO model configs in settings
-# TODO comments & readme
-# TODO saving & loading models
 
 
 #SAMPLE CODE
