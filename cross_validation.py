@@ -8,6 +8,7 @@ from src.data.preprocessing import (
     over_sample,
     under_sample,
     onehot_encode,
+    onehot_encode_kmers
 )
 import src.data.utils as utils
 from src.data.loader import DataLoader_folds
@@ -16,6 +17,7 @@ from src.data.loader import DataLoader_folds
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
+import lightgbm
 
 # import all the settings variables for the models
 from settings import *
@@ -28,6 +30,7 @@ models = {
     "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
     "Logistic Regression": LogisticRegression(),
     "Support Vector Machine": SVC(),
+    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves= 20),
 }
 
 
@@ -45,11 +48,12 @@ for name, model in models.items():
         test_y = kfold_obj.y[dev_idx]
 
         # data preprocessing
-        # train_x, test_x = string_transform_onehot_char(train_x, test_x)
         train_x, test_x = onehot_encode(train_x), onehot_encode(test_x)
+        # train_x, test_x = onehot_encode_kmers(train_x, test_x) #note to us: kmer size = 3 could be beneficial for kNN; otherwise one-hot better
 
         # sampling
         train_x, train_y = under_sample(train_x, train_y, 1)
+
         train_x, train_y = smote_sampling(train_x, train_y)
 
         # model training & testing

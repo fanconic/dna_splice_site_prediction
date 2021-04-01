@@ -4,7 +4,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import pandas as pd
 import numpy as np
 
-import src.data.utils
+from src.data.utils import getKmers
 
 
 def under_sample(X, y, sample_perc):
@@ -24,7 +24,7 @@ def over_sample(X, y, sample_perc):
 def onehot_encode(X):
     """ Encode in One-Hot format
     Args:
-        X (pandas.DataFrame): input splice in its original format 
+        X (pandas.Series): input splice in its original format 
     Returns: 
         One hot encoded splice data in np.array format
     """
@@ -35,6 +35,24 @@ def onehot_encode(X):
     enc.fit(X)
     X_1h = enc.transform(X).toarray()
     return X_1h
+
+
+def onehot_encode_kmers(X_train, X_test, kmers_size=1):
+    """ Encoding kmers of sequence to One-Hot format
+
+    """
+    X_train = X_train.apply(getKmers) # transforming sequences to kmers
+    X_train = pd.DataFrame(X_train.values.tolist(), index=X_train.index)
+    
+    X_test = X_test.apply(getKmers) # transforming sequences to kmers
+    X_test = pd.DataFrame(X_test.values.tolist(), index=X_test.index)
+
+    one_hot_enc = OneHotEncoder(handle_unknown="ignore")
+    X_train = one_hot_enc.fit_transform(X_train).toarray()
+    X_test = one_hot_enc.transform(X_test).toarray()
+    return X_train, X_test
+
+
 
 
 def over_under_sample(X, y, sample_strat_over, sample_strat_under):

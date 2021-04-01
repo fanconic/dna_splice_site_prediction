@@ -8,6 +8,8 @@ from src.data.preprocessing import (
     string_transform_labels,
     string_transform_onehot_char,
     smote_sampling,
+    onehot_encode_kmers,
+    onehot_encode
 )
 
 import src.data.utils as utils
@@ -30,8 +32,8 @@ train_x, test_x, train_y, test_y = utils.random_split(data_obj)
 
 # transforming sequences to numerical values
 
-train_x, test_x = string_transform_onehot_char(train_x, test_x)
-
+train_x, test_x = onehot_encode(train_x), onehot_encode(test_x)
+# train_x, test_x = onehot_encode_kmers(train_x, test_x)
 
 train_x, train_y = smote_sampling(train_x, train_y)
 
