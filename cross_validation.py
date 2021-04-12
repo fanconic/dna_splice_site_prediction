@@ -18,6 +18,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 import lightgbm
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier
+
 
 # import all the settings variables for the models
 from settings import *
@@ -31,6 +34,8 @@ models = {
     "Logistic Regression": LogisticRegression(),
     "Support Vector Machine": SVC(),
     "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves= 20),
+    "MLP": MLPClassifier(),
+    "Random Forest": RandomForestClassifier(),
 }
 
 
