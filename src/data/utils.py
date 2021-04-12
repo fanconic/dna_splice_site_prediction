@@ -5,6 +5,7 @@ from sklearn.metrics import (
     recall_score,
     auc,
     f1_score,
+    average_precision_score,
 )
 from sklearn.model_selection import train_test_split
 
@@ -37,12 +38,13 @@ def model_eval(predictions, ground_truth):
     recall = recall_score(ground_truth, predictions)
     f1 = f1_score(ground_truth, predictions)
     roc_auc = roc_auc_score(ground_truth, predictions)
-    auc_score = auc(fpr, tpr)
+    # auc_score = auc(fpr, tpr) # almost same as roc_auc, but possibly a bit too optimitic
+    auprc_score = average_precision_score(ground_truth, predictions)
 
     print(
         "########### Precision : {0:.4f}, Recall: {1:.4f}, F1: {2:.4f}, AUROC: {3:.4f}, AUPRC: {4:.4f} ###########".format(
-            prec, recall, f1, roc_auc, auc_score
+            prec, recall, f1, roc_auc, auprc_score
         )
     )
 
-    return auc_score
+    return roc_auc
