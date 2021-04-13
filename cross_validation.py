@@ -8,7 +8,7 @@ from src.data.preprocessing import (
     over_sample,
     under_sample,
     onehot_encode,
-    onehot_encode_kmers
+    onehot_encode_kmers,
 )
 import src.data.utils as utils
 from src.data.loader import DataLoader_folds
@@ -23,14 +23,14 @@ import lightgbm
 from settings import *
 
 
-kfold_obj = DataLoader_folds(data_path + celegans_seq, 3)
+kfold_obj = DataLoader_folds(data_path + celegans_seq, n_folds)
 
 
 models = {
     "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
     "Logistic Regression": LogisticRegression(),
     "Support Vector Machine": SVC(),
-    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves= 20),
+    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
 }
 
 

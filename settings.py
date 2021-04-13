@@ -25,6 +25,9 @@ hum_seq_test = "human_dna_test_split.csv"
 hum_seq_train = "human_dna_train_split.csv"
 hum_seq_val = "human_dna_validation_split.csv"
 
+# Cross Validation
+n_folds = 5
+
 # Preprocessing
 under_sampling_perc = 0.5
 over_sampling_perc = 0.2
