@@ -1,4 +1,4 @@
-# Splice Site Prediction
+# DNA Splice Site Prediction
 Project 2 of the course Machine Learning for Health Care in FS21 at ETH Zürich
 
 
