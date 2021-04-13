@@ -22,10 +22,10 @@ def over_sample(X, y, sample_perc):
 
 
 def onehot_encode(X):
-    """ Encode in One-Hot format
+    """Encode in One-Hot format
     Args:
-        X (pandas.Series): input splice in its original format 
-    Returns: 
+        X (pandas.Series): input splice in its original format
+    Returns:
         One hot encoded splice data in np.array format
     """
     f = lambda x: list(x)
@@ -38,21 +38,17 @@ def onehot_encode(X):
 
 
 def onehot_encode_kmers(X_train, X_test, kmers_size=1):
-    """ Encoding kmers of sequence to One-Hot format
-
-    """
-    X_train = X_train.apply(getKmers) # transforming sequences to kmers
+    """Encoding kmers of sequence to One-Hot format"""
+    X_train = X_train.apply(getKmers)  # transforming sequences to kmers
     X_train = pd.DataFrame(X_train.values.tolist(), index=X_train.index)
-    
-    X_test = X_test.apply(getKmers) # transforming sequences to kmers
+
+    X_test = X_test.apply(getKmers)  # transforming sequences to kmers
     X_test = pd.DataFrame(X_test.values.tolist(), index=X_test.index)
 
     one_hot_enc = OneHotEncoder(handle_unknown="ignore")
     X_train = one_hot_enc.fit_transform(X_train).toarray()
     X_test = one_hot_enc.transform(X_test).toarray()
     return X_train, X_test
-
-
 
 
 def over_under_sample(X, y, sample_strat_over, sample_strat_under):
@@ -124,9 +120,7 @@ def string_transform_hash(train_X, val_X):
 
 
 def string_transform_onehot_char(train_X, val_X):
-    """ Transforming the sequence characters into a DataFrame of one-hot encodings (position dependent)
-  
-  """
+    """Transforming the sequence characters into a DataFrame of one-hot encodings (position dependent)"""
 
     def split(x):
         return list(x[0])

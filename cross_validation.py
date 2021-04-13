@@ -25,17 +25,19 @@ from sklearn.ensemble import RandomForestClassifier
 # import all the settings variables for the models
 from settings import *
 
-
-kfold_obj = DataLoader_folds(data_path + celegans_seq, n_folds)
+preprocess_transforms = [onehot_encode]
+kfold_obj = DataLoader_folds(
+    data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
+)
 
 
 models = {
-    "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
     "Logistic Regression": LogisticRegression(),
     "Support Vector Machine": SVC(),
-    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves= 20),
-    "MLP": MLPClassifier(),
-    "Random Forest": RandomForestClassifier()
+    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
+    # "MLP": MLPClassifier(),
+    "Random Forest": RandomForestClassifier(),
 }
 
 
@@ -52,13 +54,8 @@ for name, model in models.items():
         test_x = kfold_obj.x[dev_idx]
         test_y = kfold_obj.y[dev_idx]
 
-        # data preprocessing
-        train_x, test_x = onehot_encode(train_x), onehot_encode(test_x)
-        # train_x, test_x = onehot_encode_kmers(train_x, test_x) #note to us: kmer size = 3 could be beneficial for kNN; otherwise one-hot better
-
         # sampling
         train_x, train_y = under_sample(train_x, train_y, 1)
-
         train_x, train_y = smote_sampling(train_x, train_y)
 
         # model training & testing
