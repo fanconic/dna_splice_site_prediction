@@ -47,4 +47,4 @@ def model_eval(predictions, ground_truth):
         )
     )
 
-    return roc_auc
+    return auprc_score

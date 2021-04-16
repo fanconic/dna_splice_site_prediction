@@ -11,8 +11,8 @@ if "COLAB_GPU" in os.environ:
 
 # Personal Computer -> you might have to adjust the path
 else:
-    data_path = "./exercise_data/"
-    out_dir = "./saved_models"
+    data_path = "../exercise_data/"
+    out_dir = "../saved_output/"
     colab = False
 
 if not os.path.exists(out_dir):
@@ -27,6 +27,9 @@ hum_seq_val = "human_dna_validation_split.csv"
 
 # Cross Validation
 n_folds = 3
+
+# Whether Predictions on testing set (see train.py) -> set to True only after everything has been finalized
+predictionOnTestingSet = False
 
 # Preprocessing
 under_sampling_perc = 0.5
