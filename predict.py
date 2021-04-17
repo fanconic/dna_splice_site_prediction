@@ -15,7 +15,6 @@ import src.data.utils as utils
 from src.data.loader import DataLoader_testing
 
 
-
 # Classifiers
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
@@ -32,25 +31,25 @@ from settings import *
 models = [
     # "K-Nearest Neighbours",
     "Logistic Regression",
-    #"Support Vector Machine",
-    #"Gradient Boosting",
+    # "Support Vector Machine",
+    # "Gradient Boosting",
     # "MLP": MLPClassifier(),
     "Random Forest",
 ]
 
 # loading and preprocessing testing data
 preprocess_transforms = [onehot_encode]
-test = DataLoader_testing(csv_file = celegans_seq, preprocess_X = preprocess_transforms)
+test = DataLoader_testing(csv_file=celegans_seq, preprocess_X=preprocess_transforms)
 
 for name in models:
-	print("### loading model {} ###".format(name))
-	model = load_model(name)
+    print("### loading model {} ###".format(name))
+    model = load_model(name)
 
-	predictions = model.predict(test.x)
+    predictions = model.predict(test.x)
 
-	# saving model predictions
-	with open(out_dir + name + "_results.npy", "wb") as file:
-		np.save(file, predictions)
-	print("### predictions saved ###")
+    # saving model predictions
+    with open(out_dir + name + "_results.npy", "wb") as file:
+        np.save(file, predictions)
+    print("### predictions saved ###")
 
 print("### process completed ###")

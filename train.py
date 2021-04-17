@@ -10,7 +10,7 @@ from src.data.preprocessing import (
     smote_sampling,
     onehot_encode_kmers,
     onehot_encode,
-    under_sample
+    under_sample,
 )
 
 # Classifiers
@@ -54,14 +54,14 @@ for name, model in models.items():
     save_model(model, name)
 
     if predictionOnTestingSet:
-    # evaluating performance on given testing set
-        test = DataLoader_sk(data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms)
+        # evaluating performance on given testing set
+        test = DataLoader_sk(
+            data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms
+        )
         predictions = model.predict(test.x)
 
         print("### performance on testing set ###")
         utils.model_eval(predictions, test.y)
 
 
-
 print("### training completed ###")
-

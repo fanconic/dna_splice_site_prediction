@@ -18,7 +18,7 @@ class DataLoader_sk:
             print("preprocessing data...")
             for transform in preprocess_X:
                 self.x = transform(self.x)
-        
+
         if "C_elegans_acc_seq" in csv_file:
             # sequences derived from C.elegans, so T instead of U
             self.x = self.x.apply(lambda x: x.replace("T", "U"))
@@ -56,18 +56,25 @@ class DataLoader_folds:
             n_splits=numFolds, shuffle=self.shuffle, random_state=42
         )
 
+
 class DataLoader_training:
     """DataLoader for final training with best hyperparameters"""
 
-    def __init__(self, csv_file_1 = hum_seq_train, csv_file_2 = hum_seq_val, shuffle=True, preprocess_X=None):
+    def __init__(
+        self,
+        csv_file_1=hum_seq_train,
+        csv_file_2=hum_seq_val,
+        shuffle=True,
+        preprocess_X=None,
+    ):
 
-        self.dataset_1 = pd.read_csv(data_path+csv_file_1)
-        self.dataset_2 = pd.read_csv(data_path+csv_file_2)
+        self.dataset_1 = pd.read_csv(data_path + csv_file_1)
+        self.dataset_2 = pd.read_csv(data_path + csv_file_2)
 
-        self.dataset = self.dataset_1.append(self.dataset_2, ignore_index = True)
+        self.dataset = self.dataset_1.append(self.dataset_2, ignore_index=True)
 
         self.shuffle = shuffle
-        if(self.shuffle):
+        if self.shuffle:
             self.dataset = self.dataset.sample(frac=1)
 
         self.x = self.dataset["sequences"]
@@ -82,14 +89,12 @@ class DataLoader_training:
 class DataLoader_testing:
     """DataLoader for final testing with trained models"""
 
-    def __init__(self, csv_file = hum_seq_hidden, preprocess_X=None):
+    def __init__(self, csv_file=hum_seq_hidden, preprocess_X=None):
 
-        self.dataset = pd.read_csv(data_path+csv_file)
+        self.dataset = pd.read_csv(data_path + csv_file)
 
         self.x = self.dataset["sequences"]
         if preprocess_X is not None:
             print("preprocessing data...")
             for transform in preprocess_X:
                 self.x = transform(self.x)
-
-

@@ -68,6 +68,10 @@ for name, model in models.items():
         print("### FOLD {} ###".format(fold))
         auprc_collect.append(utils.model_eval(predictions, test_y))
 
+        utils.save_model(model, name + "_fold_{}".format(fold + 1))
+
     print(
-        "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(np.mean(auc_collect), np.std(auc_collect))
+        "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(
+            np.mean(auc_collect), np.std(auc_collect)
+        )
     )
