@@ -33,7 +33,7 @@ The datasets have been provided to us via Moodle and is not publicly available. 
     ├── models              # All models used for our project  
     └── utils               # additional helper functions (e.g. model saver and loader)
 (├── exercise_data)      # Splice Site Data (not in repository - insert here) 
-(└── saved_models)       # Saved models (not in repository - created upon first run)
+(└── saved_output)       # Saved models (not in repository - created upon first run) & prediction results of "human_dna_test_hidden_split.csv"
 ```
 
 ## Prediction Files

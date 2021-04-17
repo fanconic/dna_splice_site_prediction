@@ -9,42 +9,59 @@ from src.data.preprocessing import (
     string_transform_onehot_char,
     smote_sampling,
     onehot_encode_kmers,
-    onehot_encode
+    onehot_encode,
+    under_sample
 )
 
+# Classifiers
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+import lightgbm
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier
+
 import src.data.utils as utils
-
 from src.models.models import k_NN
-
-from src.data.loader import DataLoader_sk
-
-
-# TODO implement pipelines
-# TODO model configs in settings
+from src.data.loader import DataLoader_training, DataLoader_sk
+from settings import *
+from src.utils.utils import save_model
 
 
-# SAMPLE CODE
+# defining the models with its hyperparameters derived from tuning
+models = {
+    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    "Logistic Regression": LogisticRegression(),
+    "Support Vector Machine": SVC(),
+    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
+    # "MLP": MLPClassifier(),
+    "Random Forest": RandomForestClassifier(),
+}
 
-# loading data
+# loading and preprocessing training data
+preprocess_transforms = [onehot_encode]
+train = DataLoader_training(preprocess_X=preprocess_transforms)
 
-data_obj = DataLoader_sk(data_path + celegans_seq)
-train_x, test_x, train_y, test_y = utils.random_split(data_obj)
+train.x, train.y = under_sample(train.x, train.y, 1)
+train.x, train.y = smote_sampling(train.x, train.y)
 
-# transforming sequences to numerical values
+# training all models and save them thereafter
+for name, model in models.items():
+    print("### fitting model {} ###".format(name))
+    model.fit(train.x, train.y)
 
-train_x, test_x = onehot_encode(train_x), onehot_encode(test_x)
-# train_x, test_x = onehot_encode_kmers(train_x, test_x)
+    print("### saving trained model {} ###".format(name))
+    save_model(model, name)
 
-train_x, train_y = smote_sampling(train_x, train_y)
+    if predictionOnTestingSet:
+    # evaluating performance on given testing set
+        test = DataLoader_sk(data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms)
+        predictions = model.predict(test.x)
 
-# defining model & training
+        print("### performance on testing set ###")
+        utils.model_eval(predictions, test.y)
 
-k_nn = k_NN()
 
-k_nn.clf.fit(train_x, train_y)
 
-# testing & eval model
+print("### training completed ###")
 
-predictions = k_nn.clf.predict(test_x)
-
-utils.model_eval(predictions, test_y)
