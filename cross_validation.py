@@ -72,6 +72,6 @@ for name, model in models.items():
 
     print(
         "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(
-            np.mean(auc_collect), np.std(auc_collect)
+            np.mean(auprc_collect), np.std(auprc_collect)
         )
     )
