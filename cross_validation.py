@@ -27,16 +27,16 @@ from settings import *
 
 preprocess_transforms = [onehot_encode]
 kfold_obj = DataLoader_folds(
-    data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
+    data_path + celegans_seq, n_folds, preprocess_X=preprocess_transforms
 )
 
 
 models = {
-    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
     "Logistic Regression": LogisticRegression(),
     "Support Vector Machine": SVC(),
     "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
-    # "MLP": MLPClassifier(),
+    "MLP": MLPClassifier(),
     "Random Forest": RandomForestClassifier(),
 }
 
@@ -55,7 +55,7 @@ for name, model in models.items():
         test_y = kfold_obj.y[dev_idx]
 
         # sampling
-        train_x, train_y = under_sample(train_x, train_y, 1)
+        train_x, train_y = over_sample(train_x, train_y, 1)
         train_x, train_y = smote_sampling(train_x, train_y)
 
         # model training & testing
