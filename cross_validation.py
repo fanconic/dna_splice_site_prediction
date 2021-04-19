@@ -44,6 +44,7 @@ models = {
 # K_Fold iteration loop
 for name, model in models.items():
     print(name)
+    roc_auc_collect = []
     auprc_collect = []
     for fold, (train_idx, dev_idx) in enumerate(
         kfold_obj.kfold.split(kfold_obj.x, kfold_obj.y)
@@ -66,12 +67,17 @@ for name, model in models.items():
         )
 
         print("### FOLD {} ###".format(fold))
-        auprc_collect.append(utils.model_eval(predictions, test_y))
+        roc_auc, auprc = utils.model_eval(predictions, test_y)
+        roc_auc_collect.append(auc)
+        auprc_collect.append(auprc)
 
         save_model(model, name + "_fold_{}".format(fold + 1))
 
     print(
         "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(
             np.mean(auprc_collect), np.std(auprc_collect)
+        )
+        "AUC score mean: {0:.4f}+-{1:.4f}\n".format(
+            np.mean(roc_auc_collect), np.std(roc_auc_collect)
         )
     )
