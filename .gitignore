@@ -2,6 +2,7 @@
 project2_data
 saved_models
 exercise_data
+lsf.*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

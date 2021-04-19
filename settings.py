@@ -26,7 +26,7 @@ hum_seq_train = "human_dna_train_split.csv"
 hum_seq_val = "human_dna_validation_split.csv"
 
 # Cross Validation
-n_folds = 5
+n_folds = 3
 
 # Whether Predictions on testing set (see train.py) -> set to True only after everything has been finalized
 predictionOnTestingSet = False
