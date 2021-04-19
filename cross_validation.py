@@ -32,12 +32,12 @@ kfold_obj = DataLoader_folds(
 
 
 models = {
-    #"K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
     "Logistic Regression": LogisticRegression(class_weight="balanced"),
     # "Support Vector Machine": SVC(),
-    #"Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
-    #"MLP": MLPClassifier(),
-    #"Random Forest": RandomForestClassifier(),
+    # "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
+    # "MLP": MLPClassifier(),
+    # "Random Forest": RandomForestClassifier(),
 }
 
 
@@ -76,8 +76,5 @@ for name, model in models.items():
     print(
         "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(
             np.mean(auprc_collect), np.std(auprc_collect)
-        )
-        "AUC score mean: {0:.4f}+-{1:.4f}\n".format(
-            np.mean(roc_auc_collect), np.std(roc_auc_collect)
         )
     )
