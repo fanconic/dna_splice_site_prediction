@@ -9,14 +9,14 @@ from src.data.utils import getKmers
 
 def under_sample(X, y, sample_perc):
     """randomly undersample the majority class"""
-    undersample = RandomUnderSampler(sampling_strategy=sample_perc)
+    undersample = RandomUnderSampler(sampling_strategy=sample_perc, random_state=42)
     X_under, y_under = undersample.fit_resample(X, y)
     return X_under, y_under
 
 
 def over_sample(X, y, sample_perc):
     """randomly oversample the minority class"""
-    oversample = RandomOverSampler(sampling_strategy=sample_perc)
+    oversample = RandomOverSampler(sampling_strategy=sample_perc, random_state=42)
     X_over, y_over = oversample.fit_resample(X, y)
     return X_over, y_over
 
@@ -68,7 +68,7 @@ def smote_sampling(X, y, sampling_strategy_perc=None):
     smote_sample = (
         SMOTE()
         if sampling_strategy_perc == None
-        else SMOTE(sampling_strategy=sampling_strategy_perc)
+        else SMOTE(sampling_strategy=sampling_strategy_perc, random_state=42)
     )
     X_transformed, y_transformed = smote_sample.fit_resample(X, y)
     return X_transformed, y_transformed
