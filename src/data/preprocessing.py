@@ -31,9 +31,9 @@ def onehot_encode(X):
     f = lambda x: list(x)
     X = X.apply(f)
     X = pd.DataFrame(X.values.tolist(), index=X.index)
-    enc = OneHotEncoder(handle_unknown="ignore")
-    enc.fit(X)
-    X_1h = enc.transform(X).toarray()
+    enc = OneHotEncoder(sparse=False, categories = [['A', 'C', 'G', 'T'] for _ in range(X.shape[1])])
+    enc.fit_transform(X)
+    X_1h = enc.transform(X)
     return X_1h
 
 

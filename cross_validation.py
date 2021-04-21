@@ -55,7 +55,7 @@ for name, model in models.items():
         test_y = kfold_obj.y[dev_idx]
 
         # sampling
-        train_x, train_y = undersample_sample(train_x, train_y, 1)
+        train_x, train_y = under_sample(train_x, train_y, 1)
         # train_x, train_y = smote_sampling(train_x, train_y)
 
         # model training & testing
