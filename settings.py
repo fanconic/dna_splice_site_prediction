@@ -11,8 +11,8 @@ if "COLAB_GPU" in os.environ:
 
 # Personal Computer -> you might have to adjust the path
 else:
-    data_path = "../exercise_data/"
-    out_dir = "../saved_output/"
+    data_path = "./exercise_data/"
+    out_dir = "./saved_output/"
     colab = False
 
 if not os.path.exists(out_dir):

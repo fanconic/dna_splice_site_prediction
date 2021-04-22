@@ -10,9 +10,7 @@ from sklearn.pipeline import make_pipeline
 
 
 class k_NN:
-    """ K-nearest neighbors classifier
-
-	"""
+    """K-nearest neighbors classifier"""
 
     def __init__(self, n_neighbors=3):
         self.clf = KNeighborsClassifier(n_neighbors=n_neighbors)
@@ -22,29 +20,25 @@ class k_NN:
 
 
 class random_forest:
-    """ Random forest classifier (ensemble)
+    """Random forest classifier (ensemble)"""
 
-	"""
-
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         self.clf = RandomForestClassifier(
             n_estimators=200, max_depth=max_depth, random_state=seed
         )
 
 
 class SVM:
-    """ Support vector classification
-
-	"""
+    """Support vector classification"""
 
     def __init__(self):
         self.clf = make_pipeline(StandardScaler(), SVC(gamma="auto"))
 
 
 class Boosting:
-    """ Gradient boosting model
-
-	"""
+    """Gradient boosting model"""
 
     def __init__(self):
         self.clf = lightgbm.LGBMClassifier()
