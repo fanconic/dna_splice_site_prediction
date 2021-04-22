@@ -16,7 +16,7 @@ from src.data.loader import DataLoader_folds
 # Classifiers
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC, LinearSVC
+from sklearn.svm import SVC
 import lightgbm
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -27,18 +27,19 @@ from settings import *
 
 preprocess_transforms = [onehot_encode]
 kfold_obj = DataLoader_folds(
-    data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
+    data_path + celegans_seq, n_folds, preprocess_X=preprocess_transforms
 )
 
 
 models = {
-    #"K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
-    "Logistic Regression": LogisticRegression(class_weight="balanced", max_iter=5000),
-    "Support Vector Machine": LinearSVC(class_weight="balanced",max_iter=5000),
-    "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20,class_weight='balanced'),
+    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    "Logistic Regression": LogisticRegression(class_weight="balanced"),
+    # "Support Vector Machine": SVC(),
+    # "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
     # "MLP": MLPClassifier(),
-    "Random Forest": RandomForestClassifier(class_weight='balanced'),
+    # "Random Forest": RandomForestClassifier(),
 }
+
 
 # K_Fold iteration loop
 for name, model in models.items():
@@ -55,8 +56,8 @@ for name, model in models.items():
         test_y = kfold_obj.y[dev_idx]
 
         # sampling
-        train_x, train_y = undersample_sample(train_x, train_y, 1)
-        # train_x, train_y = smote_sampling(train_x, train_y)
+        train_x, train_y = over_sample(train_x, train_y, 1)
+        train_x, train_y = smote_sampling(train_x, train_y)
 
         # model training & testing
         model.fit(train_x, train_y)
@@ -67,7 +68,7 @@ for name, model in models.items():
 
         print("### FOLD {} ###".format(fold))
         roc_auc, auprc = utils.model_eval(predictions, test_y)
-        roc_auc_collect.append(auc)
+        roc_auc_collect.append(roc_auc)
         auprc_collect.append(auprc)
 
         save_model(model, name + "_fold_{}".format(fold + 1))
@@ -75,5 +76,8 @@ for name, model in models.items():
     print(
         "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(
             np.mean(auprc_collect), np.std(auprc_collect)
-        )
+        ),
+        "AUC score mean: {0:.4f}+-{1:.4f}\n".format(
+            np.mean(roc_auc_collect), np.std(roc_auc_collect)
+        ),
     )
