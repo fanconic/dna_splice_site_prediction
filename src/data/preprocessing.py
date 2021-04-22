@@ -21,20 +21,33 @@ def over_sample(X, y, sample_perc):
     return X_over, y_over
 
 
-def onehot_encode(X):
+def onehot_encode(X, flatten=True):
     """Encode in One-Hot format
     Args:
         X (pandas.Series): input splice in its original format
+        flatten (default True): flattens the output
     Returns:
         One hot encoded splice data in np.array format
     """
-    f = lambda x: list(x)
-    X = X.apply(f)
-    X = pd.DataFrame(X.values.tolist(), index=X.index)
-    enc = OneHotEncoder(sparse=False, categories = [['A', 'C', 'G', 'T'] for _ in range(X.shape[1])])
-    enc.fit_transform(X)
-    X_1h = enc.transform(X)
-    return X_1h
+
+    def _one_hot_econde(seq):
+        map = np.asarray(
+            [[0, 0, 0, 0], [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        )
+
+        seq = seq.upper().replace("A", "\x01").replace("C", "\x02")
+        seq = seq.replace("G", "\x03").replace("T", "\x04").replace("N", "\x00")
+
+        return map[np.fromstring(seq, np.int8) % 5]
+
+    X_np = np.zeros((len(X), len(X.iloc[0]), 4))
+    for i, seq in enumerate(X):
+        X_np[i] = _one_hot_econde(seq)
+
+    if flatten:
+        X_np = X_np.reshape(X.shape[0], -1)
+
+    return X_np
 
 
 def onehot_encode_kmers(X_train, X_test, kmers_size=1):

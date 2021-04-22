@@ -16,7 +16,7 @@ from src.data.loader import DataLoader_folds
 # Classifiers
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
+from sklearn.svm import SVC, LinearSVC
 import lightgbm
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -34,10 +34,12 @@ kfold_obj = DataLoader_folds(
 models = {
     # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
     "Logistic Regression": LogisticRegression(class_weight="balanced"),
-    # "Support Vector Machine": SVC(),
-    # "Gradient Boosting": lightgbm.LGBMClassifier(n_estimators=100, num_leaves=20),
-    # "MLP": MLPClassifier(),
-    # "Random Forest": RandomForestClassifier(),
+    "Support Vector Machine": LinearSVC(class_weight="balanced"),
+    "Gradient Boosting": lightgbm.LGBMClassifier(
+        n_estimators=100, num_leaves=20, class_weight="balanced"
+    ),
+    "MLP": MLPClassifier(),
+    "Random Forest": RandomForestClassifier(class_weight="balanced"),
 }
 
 
@@ -55,12 +57,11 @@ for name, model in models.items():
         test_x = kfold_obj.x[dev_idx]
         test_y = kfold_obj.y[dev_idx]
 
-        train_y[train_y == -1] = 0
-        test_y[test_y == -1] = 0
+        train_y = train_y.replace(-1, 0)
+        test_y = test_y.replace(-1, 0)
 
         # sampling
-        train_x, train_y = over_sample(train_x, train_y, 1)
-        train_x, train_y = smote_sampling(train_x, train_y)
+        # train_x, train_y = under_sample(train_x, train_y, 1)
 
         # model training & testing
         model.fit(train_x, train_y)
