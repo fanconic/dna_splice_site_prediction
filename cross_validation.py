@@ -55,6 +55,9 @@ for name, model in models.items():
         test_x = kfold_obj.x[dev_idx]
         test_y = kfold_obj.y[dev_idx]
 
+        train_y[train_y == -1] = 0
+        test_y[test_y == -1] = 0
+
         # sampling
         train_x, train_y = over_sample(train_x, train_y, 1)
         train_x, train_y = smote_sampling(train_x, train_y)
@@ -62,9 +65,6 @@ for name, model in models.items():
         # model training & testing
         model.fit(train_x, train_y)
         predictions = model.predict(test_x)
-        predictions = pd.DataFrame(predictions).applymap(
-            lambda x: 1 if (x >= 0) else -1
-        )
 
         print("### FOLD {} ###".format(fold))
         roc_auc, auprc = utils.model_eval(predictions, test_y)
