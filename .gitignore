@@ -1,6 +1,7 @@
 # data
 project2_data
 saved_models
+saved_output
 exercise_data
 lsf.*
 *.ipynb
