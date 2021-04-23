@@ -60,6 +60,7 @@ class DataLoader_folds:
             n_splits=numFolds, shuffle=self.shuffle, random_state=42
         )
 
+
 class DataLoader_split:
   """DataLoader to generate stratified training and test split"""
 
