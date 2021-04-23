@@ -27,7 +27,7 @@ from settings import *
 
 preprocess_transforms = [onehot_encode]
 kfold_obj = DataLoader_folds(
-    data_path + celegans_seq, n_folds, preprocess_X=preprocess_transforms
+    data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
 )
 
 
