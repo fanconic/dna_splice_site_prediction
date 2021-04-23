@@ -34,7 +34,7 @@ def scheduler(epoch, lr):
 
 
 callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
-epochs = 10
+epochs = 12
 batch_size = 256
 class_weights = class_weight.compute_class_weight(
     "balanced", np.unique(train.y), train.y
@@ -48,7 +48,7 @@ for name, model in models.items():
     model.compile(
         loss="binary_crossentropy",
         optimizer=tf.keras.optimizers.Adam(lr=1e-3),
-        metrics=[tf.keras.metrics.AUC(curve="PR")],
+        metrics=[tf.keras.metrics.AUC(curve="PR"), tf.keras.metrics.AUC(curve="ROC")],
     )
 
     input_shape = (1, 398, 4)
@@ -57,7 +57,7 @@ for name, model in models.items():
     print(model.summary())
 
     model.fit(
-        train.x,
+        x=train.x,
         y=train.y,
         validation_data=(val.x, val.y),
         class_weight=class_weights,
@@ -70,14 +70,19 @@ for name, model in models.items():
     print("### saving trained model {} ###".format(name))
     model.save(out_dir + name)
 
+    predictions = model.predict(val.x)
+    predictions = predictions > 0.5
+    print("### performance on valdiation set ###")
+    utils.model_eval(predictions.reshape(-1), val.y)
+
     if predictionOnTestingSet:
         # evaluating performance on given testing set
         test = DataLoader_sk(
             data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms
         )
         predictions = model.predict(test.x)
-
+        predictions = predictions > 0.5
         print("### performance on testing set ###")
-        utils.model_eval(predictions, test.y)
+        utils.model_eval(predictions.reshape(-1), test.y)
 
 print("### training completed ###")
