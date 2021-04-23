@@ -30,16 +30,16 @@ def model_eval(predictions, ground_truth):
         ground_truth, predictions, pos_label=1
     )  # fpr: inc false positive rate; tpr: inc true positive rate
     prec = precision_score(ground_truth, predictions)
-    recall = recall_score(ground_truth, predictions)
+    rec = recall_score(ground_truth, predictions)
     f1 = f1_score(ground_truth, predictions)
     roc_auc = roc_auc_score(ground_truth, predictions)
     # auc_score = auc(fpr, tpr) # almost same as roc_auc, but possibly a bit too optimitic
-    fpr, tpr, thresholds = precision_recall_curve(ground_truth, predictions)
-    auprc_score = auc(fpr, tpr)
-    
+    precision, recall, thresholds = precision_recall_curve(ground_truth, predictions)
+    auprc_score = auc(recall, precision)
+
     print(
         "########### Precision : {0:.4f}, Recall: {1:.4f}, F1: {2:.4f}, AUROC: {3:.4f}, AUPRC: {4:.4f} ###########".format(
-            prec, recall, f1, roc_auc, auprc_score
+            prec, rec, f1, roc_auc, auprc_score
         )
     )
 
