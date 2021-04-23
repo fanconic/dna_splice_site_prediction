@@ -14,15 +14,18 @@ class DataLoader_sk:
             self.dataset = self.dataset.sample(frac=1)
 
         self.x = self.dataset["sequences"]
+
+        if "C_elegans_acc_seq" in csv_file:
+            # sequences derived from C.elegans, so T instead of U
+            self.x = self.x.apply(lambda x: x.replace("U", "T"))
+
         if preprocess_X is not None:
             print("preprocessing data...")
             for transform in preprocess_X:
                 self.x = transform(self.x)
 
-        if "C_elegans_acc_seq" in csv_file:
-            # sequences derived from C.elegans, so T instead of U
-            self.x = self.x.apply(lambda x: x.replace("T", "U"))
         self.y = self.dataset["labels"]
+        self.y = self.y.replace(-1, 0).values
 
 
 class DataLoader_folds:
@@ -84,6 +87,7 @@ class DataLoader_training:
                 self.x = transform(self.x)
 
         self.y = self.dataset["labels"]
+        self.y = self.y.replace(-1, 0).values
 
 
 class DataLoader_testing:

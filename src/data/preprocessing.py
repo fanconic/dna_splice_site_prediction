@@ -21,7 +21,7 @@ def over_sample(X, y, sample_perc):
     return X_over, y_over
 
 
-def onehot_encode(X, flatten=True):
+def onehot_encode(X, flatten=False):
     """Encode in One-Hot format
     Args:
         X (pandas.Series): input splice in its original format
