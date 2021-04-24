@@ -85,10 +85,10 @@ for name, model in models.items():
         test = DataLoader_sk(
             data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms
         )
-        predictions = model.predict(test.x)
-        predictions = predictions > 0.5
+        prediction_probas = model.predict(test.x)
+        predictions = prediction_probas > 0.5
         print("### performance on testing set ###")
-        utils.model_eval(predictions.reshape(-1), test.y)
+        utils.model_eval(predictions.reshape(-1), test.y, prediction_probas)
         results = model.evaluate(test.x, test.y, batch_size=256, verbose=2)
         print("val loss, val auprc, val auroc:", results)
 
