@@ -33,7 +33,7 @@ class SpliceAI80(tf.keras.Model):
         self.block_3 = ResBlock(32, 11, 1)
         self.block_4 = ResBlock(32, 11, 1)
 
-        self.crop = tf.keras.layers.Cropping1D(cropping=(40, 40))
+        self.crop = tf.keras.layers.Cropping1D(cropping=(41, 40))
 
     def call(self, inputs):
         x_1 = self.conv_1(inputs)

@@ -1,5 +1,9 @@
 import os
 import getpass
+import tensorflow as tf
+from src.models.metrics import AUPRC
+
+data = "celegans"  # either 'humans' or 'celegans'
 
 username = getpass.getuser()
 
@@ -11,8 +15,8 @@ if "COLAB_GPU" in os.environ:
 
 # Personal Computer -> you might have to adjust the path
 else:
-    data_path = "../exercise_data/"
-    out_dir = "../saved_output/"
+    data_path = "./exercise_data/"
+    out_dir = "./saved_output/"
     colab = False
 
 if not os.path.exists(out_dir):
@@ -29,7 +33,7 @@ hum_seq_val = "human_dna_validation_split.csv"
 n_folds = 3
 
 # Whether Predictions on testing set (see train.py) -> set to True only after everything has been finalized
-predictionOnTestingSet = True
+predictionOnTestingSet = False
 
 # Preprocessing
 under_sampling_perc = 0.5
@@ -50,3 +54,7 @@ n_neighbors = 3
 max_depth = 10
 seed = 42
 n_estimators = 200
+
+# SpliceAI
+epochs = 15
+batch_size = 256

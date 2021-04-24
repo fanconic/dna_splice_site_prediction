@@ -64,7 +64,7 @@ for name, model in models.items():
         model.fit(train_x, train_y)
         predictions = model.predict(test_x)
         try:
-            predict_probas = model.predict_proba(test_x)[:,1]
+            predict_probas = model.predict_proba(test_x)[:, 1]
         except:
             predict_probas = model.decision_function(test_x)
 

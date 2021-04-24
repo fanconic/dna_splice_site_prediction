@@ -7,7 +7,7 @@ from settings import *
 class DataLoader_sk:
     """DataLoader for sklearn"""
 
-    def __init__(self, csv_file, shuffle=True, preprocess_X=None):
+    def __init__(self, csv_file, shuffle=True, preprocess_X=None, flatten=True):
 
         self.dataset = pd.read_csv(csv_file)
         self.shuffle = shuffle
@@ -23,7 +23,7 @@ class DataLoader_sk:
         if preprocess_X is not None:
             print("preprocessing data...")
             for transform in preprocess_X:
-                self.x = transform(self.x)
+                self.x = transform(self.x, flatten=flatten)
 
         self.y = self.dataset["labels"]
         self.y = self.y.replace(-1, 0).values
@@ -32,7 +32,9 @@ class DataLoader_sk:
 class DataLoader_folds:
     """DataLoader for n_folds (cross-validation)"""
 
-    def __init__(self, csv_file, numFolds, shuffle=True, preprocess_X=None):
+    def __init__(
+        self, csv_file, numFolds, shuffle=True, preprocess_X=None, flatten=True
+    ):
         """Initialize a stratified K fold dataloader
         Args:
             csv_file: path of the csv_file
@@ -51,25 +53,43 @@ class DataLoader_folds:
         if preprocess_X is not None:
             print("preprocessing data...")
             for transform in preprocess_X:
-                self.x = transform(self.x)
+                self.x = transform(self.x, flatten=flatten)
         self.y = self.dataset["labels"]
+        self.y = self.y.replace(-1, 0).values
 
         self.shuffle = shuffle
         self.numFolds = numFolds
         self.kfold = StratifiedKFold(
-            n_splits=numFolds, shuffle=self.shuffle, random_state=seed
+            n_splits=self.numFolds, shuffle=self.shuffle, random_state=seed
         )
 
 
 class DataLoader_split:
     """DataLoader to generate stratified training and test split"""
 
-    def __init__(self, csv_file, test_size=0.2, doStratify=True, random_state=seed):
+    def __init__(
+        self,
+        csv_file,
+        test_size=0.2,
+        doStratify=True,
+        random_state=seed,
+        preprocess_X=None,
+        flatten=True,
+    ):
         self.dataset = pd.read_csv(csv_file)
         self.x = self.dataset["sequences"]
         self.y = self.dataset["labels"]
+        self.y = self.y.replace(-1, 0).values
+
+        if "C_elegans_acc_seq" in csv_file:
+            self.x = "N" * 157 + self.x + "N" * 159
 
         self.test_size = test_size
+
+        if preprocess_X is not None:
+            print("preprocessing data...")
+            for transform in preprocess_X:
+                self.x = transform(self.x, flatten=flatten)
 
         if doStratify:
             self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(
@@ -91,6 +111,7 @@ class DataLoader_training:
         csv_file_2=hum_seq_val,
         shuffle=True,
         preprocess_X=None,
+        flatten=True,
     ):
 
         self.dataset_1 = pd.read_csv(data_path + csv_file_1)
@@ -106,7 +127,7 @@ class DataLoader_training:
         if preprocess_X is not None:
             print("preprocessing data...")
             for transform in preprocess_X:
-                self.x = transform(self.x)
+                self.x = transform(self.x, flatten=flatten)
 
         self.y = self.dataset["labels"]
         self.y = self.y.replace(-1, 0).values
@@ -115,7 +136,7 @@ class DataLoader_training:
 class DataLoader_testing:
     """DataLoader for final testing with trained models"""
 
-    def __init__(self, csv_file=hum_seq_hidden, preprocess_X=None):
+    def __init__(self, csv_file=hum_seq_hidden, preprocess_X=None, flatten=True):
 
         self.dataset = pd.read_csv(data_path + csv_file)
 
@@ -123,4 +144,4 @@ class DataLoader_testing:
         if preprocess_X is not None:
             print("preprocessing data...")
             for transform in preprocess_X:
-                self.x = transform(self.x)
+                self.x = transform(self.x, flatten=flatten)

@@ -7,23 +7,43 @@ from src.data.preprocessing import (
     onehot_encode,
 )
 
-from src.models.spliceai import SpliceAI400
+from src.models.spliceai import SpliceAI400, SpliceAI80
 
 import src.data.utils as utils
-from src.data.loader import DataLoader_training, DataLoader_sk
+from src.data.loader import DataLoader_sk, DataLoader_split
 from settings import *
 from src.utils.utils import save_model
 from sklearn.utils import class_weight
-from sklearn.metrics import precision_recall_curve, auc
-from src.models.metrics import AUPRC
 
-# loading and preprocessing training data
+
 preprocess_transforms = [onehot_encode]
-train = DataLoader_sk(data_path + hum_seq_train, preprocess_X=preprocess_transforms)
-val = DataLoader_sk(data_path + hum_seq_val, preprocess_X=preprocess_transforms)
+
+if data == "humans":
+    # loading and preprocessing training data
+    train_loader = DataLoader_sk(
+        data_path + hum_seq_train, preprocess_X=preprocess_transforms, flatten=False
+    )
+    val_loader = DataLoader_sk(
+        data_path + hum_seq_val, preprocess_X=preprocess_transforms
+    )
+    X_train, y_train = train_loader.x, train_loader.y
+    X_val, y_val = val_loader.x, val_loader.y
+
+elif data == "celegans":
+    loader = DataLoader_split(
+        data_path + celegans_seq, preprocess_X=preprocess_transforms, flatten=False
+    )
+    X_train, y_train = loader.train_x, loader.train_y
+    X_val, y_val = loader.test_x, loader.test_y
+
+else:
+    print("data not available. Only 'humans' or 'celegans' DNA sequences.")
+    exit()
+
 
 models = {
-    "SpliceAI400": SpliceAI400(),
+    "SpliceAI80": (SpliceAI80(), (157, -159), (1, 82, 4)),
+    "SpliceAI400": (SpliceAI400(), (0,399), (1, 398, 4)),
 }
 
 
@@ -34,18 +54,24 @@ def scheduler(epoch, lr):
         return lr * 1 / 2
 
 
-epochs = 15
-batch_size = 256
 class_weights = class_weight.compute_class_weight(
-    "balanced", np.unique(train.y), train.y
+    "balanced", np.unique(y_train), y_train
 )
 class_weights = {i: class_weights[i] for i in range(2)}
-callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
-auprc_callback = AUPRC((val.x, val.y), batch_size=batch_size)
 
 
 # training all models and save them thereafte
-for name, model in models.items():
+for name, (model, (start, end), input_shape) in models.items():
+
+    # Callbacks
+    callbacks = [
+        tf.keras.callbacks.LearningRateScheduler(scheduler),
+        AUPRC((X_val[:, start:end, :], y_val), batch_size=batch_size),
+        tf.keras.callbacks.ModelCheckpoint(
+            out_dir + name + ".hdf5", save_best_only=True, monitor="val_auc", mode="max"
+        ),
+    ]
+
     print("### fitting model {} ###".format(name))
 
     model.compile(
@@ -54,42 +80,34 @@ for name, model in models.items():
         metrics=[tf.keras.metrics.AUC(curve="PR"), tf.keras.metrics.AUC(curve="ROC")],
     )
 
-    input_shape = (1, 398, 4)
     x = tf.random.normal(input_shape)
     model(x)
     print(model.summary())
 
     model.fit(
-        x=train.x,
-        y=train.y,
-        validation_data=(val.x, val.y),
+        x=X_train[:, start:end, :],
+        y=y_train,
+        validation_data=(X_val[:, start:end, :], y_val),
         class_weight=class_weights,
         epochs=epochs,
         batch_size=batch_size,
         verbose=2,
-        callbacks=[callback, auprc_callback],
+        callbacks=[callbacks],
     )
 
-    print("### saving trained model {} ###".format(name))
-    model.save(out_dir + name)
-
-    prediction_probas = model.predict(val.x)
+    prediction_probas = model.predict(X_val[:, start:end, :])
     predictions = prediction_probas > 0.5
     print("### performance on valdiation set ###")
-    utils.model_eval(predictions.reshape(-1), val.y, prediction_probas.reshape(-1))
-    results = model.evaluate(val.x, val.y, batch_size=256, verbose=2)
-    print("val loss, val auprc, val auroc:", results)
+    utils.model_eval(predictions.reshape(-1), y_val, prediction_probas.reshape(-1))
 
     if predictionOnTestingSet:
         # evaluating performance on given testing set
         test = DataLoader_sk(
             data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms
         )
-        prediction_probas = model.predict(test.x)
+        prediction_probas = model.predict(test.x[:, start:end, :])
         predictions = prediction_probas > 0.5
         print("### performance on testing set ###")
         utils.model_eval(predictions.reshape(-1), test.y, prediction_probas.reshape(-1))
-        results = model.evaluate(test.x, test.y, batch_size=256, verbose=2)
-        print("val loss, val auprc, val auroc:", results)
 
 print("### training completed ###")
