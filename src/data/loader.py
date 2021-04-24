@@ -62,21 +62,24 @@ class DataLoader_folds:
 
 
 class DataLoader_split:
-  """DataLoader to generate stratified training and test split"""
+    """DataLoader to generate stratified training and test split"""
 
-  def __init__(self, csv_file, test_size=0.2, doStratify = True, random_state=seed):
-    self.dataset = pd.read_csv(csv_file)
-    self.x = self.dataset["sequences"]
-    self.y = self.dataset["labels"]
+    def __init__(self, csv_file, test_size=0.2, doStratify=True, random_state=seed):
+        self.dataset = pd.read_csv(csv_file)
+        self.x = self.dataset["sequences"]
+        self.y = self.dataset["labels"]
 
-    self.test_size = test_size
+        self.test_size = test_size
 
-    if doStratify:
-      self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(self.x, self.y, test_size=test_size, stratify=self.y, random_state=seed)
+        if doStratify:
+            self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(
+                self.x, self.y, test_size=test_size, stratify=self.y, random_state=seed
+            )
 
-    else:
-      self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(self.x, self.y, test_size=test_size, stratify=None, random_state=seed)
-
+        else:
+            self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(
+                self.x, self.y, test_size=test_size, stratify=None, random_state=seed
+            )
 
 
 class DataLoader_training:

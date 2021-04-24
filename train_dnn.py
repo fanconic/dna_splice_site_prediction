@@ -41,7 +41,7 @@ class_weights = class_weight.compute_class_weight(
 )
 class_weights = {i: class_weights[i] for i in range(2)}
 callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
-auprc_callback = AUPRC((val.x, val.y), batch_size = batch_size)
+auprc_callback = AUPRC((val.x, val.y), batch_size=batch_size)
 
 
 # training all models and save them thereafte

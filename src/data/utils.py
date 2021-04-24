@@ -6,7 +6,7 @@ from sklearn.metrics import (
     auc,
     f1_score,
     average_precision_score,
-    precision_recall_curve
+    precision_recall_curve,
 )
 from sklearn.model_selection import train_test_split
 
