@@ -37,6 +37,8 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 ```
 
 ## Prediction Files
+The trained models specified in the report and its predictions for the `human_dna_test_hidden_split.csv` dataset can be found on GitLab via the following link: [GitLab](https://gitlab.ethz.ch/manstude/ml4h_project_2).
+
 
 ## Contributors
 - Manuel Studer - manstude@ethz.ch
