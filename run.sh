@@ -1,3 +1,4 @@
 echo 'Standard Training.'
-python -u cross_validation.py
+module load eth_proxy python_gpu/3.7.1 cudnn/8.0.5 cuda/11.0.3
+python -u train_dnn.py
 echo 'Script completed!'
