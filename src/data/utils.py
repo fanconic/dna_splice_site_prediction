@@ -24,7 +24,7 @@ def random_split(data_obj):
     return X_train, X_test, y_train, y_test
 
 
-def model_eval(predictions, ground_truth):
+def model_eval(predictions, ground_truth, predict_probas):
     """Assesing the model's performance on key metrics"""
     fpr, tpr, threshold = roc_curve(
         ground_truth, predictions, pos_label=1
@@ -32,10 +32,10 @@ def model_eval(predictions, ground_truth):
     prec = precision_score(ground_truth, predictions)
     recall = recall_score(ground_truth, predictions)
     f1 = f1_score(ground_truth, predictions)
-    roc_auc = roc_auc_score(ground_truth, predictions)
+    roc_auc = roc_auc_score(ground_truth, predict_probas)
     # auc_score = auc(fpr, tpr) # almost same as roc_auc, but possibly a bit too optimitic
-    fpr, tpr, thresholds = precision_recall_curve(ground_truth, predictions)
-    auprc_score = auc(fpr, tpr)
+    precision, recall, thresholds = precision_recall_curve(ground_truth, predict_probas)
+    auprc_score = auc(recall, precision)
     
     print(
         "########### Precision : {0:.4f}, Recall: {1:.4f}, F1: {2:.4f}, AUROC: {3:.4f}, AUPRC: {4:.4f} ###########".format(

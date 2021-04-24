@@ -57,18 +57,16 @@ for name, model in models.items():
         test_x = kfold_obj.x[dev_idx]
         test_y = kfold_obj.y[dev_idx]
 
-        train_y = train_y.replace(-1, 0)
-        test_y = test_y.replace(-1, 0)
-
         # sampling
         # train_x, train_y = under_sample(train_x, train_y, 1)
 
         # model training & testing
         model.fit(train_x, train_y)
         predictions = model.predict(test_x)
+        predict_probas = model.predict_proba(test_x)[:,1]
 
         print("### FOLD {} ###".format(fold))
-        roc_auc, auprc = utils.model_eval(predictions, test_y)
+        roc_auc, auprc = utils.model_eval(predictions, test_y, predict_probas)
         roc_auc_collect.append(roc_auc)
         auprc_collect.append(auprc)
 
