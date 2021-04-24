@@ -63,7 +63,10 @@ for name, model in models.items():
         # model training & testing
         model.fit(train_x, train_y)
         predictions = model.predict(test_x)
-        predict_probas = model.predict_proba(test_x)[:,1]
+        try:
+            predict_probas = model.predict_proba(test_x)[:,1]
+        except:
+            predict_probas = model.decision_function(test_x)
 
         print("### FOLD {} ###".format(fold))
         roc_auc, auprc = utils.model_eval(predictions, test_y, predict_probas)

@@ -34,7 +34,7 @@ def scheduler(epoch, lr):
         return lr * 1 / 2
 
 
-epochs = 10
+epochs = 15
 batch_size = 256
 class_weights = class_weight.compute_class_weight(
     "balanced", np.unique(train.y), train.y
@@ -73,10 +73,10 @@ for name, model in models.items():
     print("### saving trained model {} ###".format(name))
     model.save(out_dir + name)
 
-    prediction_probas = model.predict(val.x).reshape(-1)
+    prediction_probas = model.predict(val.x)
     predictions = prediction_probas > 0.5
     print("### performance on valdiation set ###")
-    utils.model_eval(predictions, val.y, prediction_probas)
+    utils.model_eval(predictions.reshape(-1), val.y, prediction_probas.reshape(-1))
     results = model.evaluate(val.x, val.y, batch_size=256, verbose=2)
     print("val loss, val auprc, val auroc:", results)
 
@@ -88,7 +88,7 @@ for name, model in models.items():
         prediction_probas = model.predict(test.x)
         predictions = prediction_probas > 0.5
         print("### performance on testing set ###")
-        utils.model_eval(predictions.reshape(-1), test.y, prediction_probas)
+        utils.model_eval(predictions.reshape(-1), test.y, prediction_probas.reshape(-1))
         results = model.evaluate(test.x, test.y, batch_size=256, verbose=2)
         print("val loss, val auprc, val auroc:", results)
 
