@@ -17,7 +17,7 @@ class AUPRC(tf.keras.callbacks.Callback):
 
         xVal, yVal = self.validation_data
         yPred = self.model.predict(xVal, verbose= 0)
-        yPred = yPred > 0.5
+        #yPred = yPred > 0.5
             
         yPred = np.squeeze(yPred)
         precision, recall, thresholds = precision_recall_curve(yVal, yPred)

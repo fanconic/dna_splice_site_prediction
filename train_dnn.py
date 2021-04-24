@@ -73,10 +73,10 @@ for name, model in models.items():
     print("### saving trained model {} ###".format(name))
     model.save(out_dir + name)
 
-    predictions = model.predict(val.x)
-    predictions = predictions > 0.5
+    prediction_probas = model.predict(val.x)
+    predictions = prediction_probas > 0.5
     print("### performance on valdiation set ###")
-    utils.model_eval(predictions.reshape(-1), val.y)
+    utils.model_eval(predictions.reshape(-1), val.y, prediction_probas)
     results = model.evaluate(val.x, val.y, batch_size=256, verbose=2)
     print("val loss, val auprc, val auroc:", results)
 
