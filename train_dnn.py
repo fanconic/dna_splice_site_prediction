@@ -14,7 +14,8 @@ from src.data.loader import DataLoader_training, DataLoader_sk
 from settings import *
 from src.utils.utils import save_model
 from sklearn.utils import class_weight
-
+from sklearn.metrics import precision_recall_curve, auc
+from src.models.metrics import AUPRC
 
 # loading and preprocessing training data
 preprocess_transforms = [onehot_encode]
@@ -33,13 +34,15 @@ def scheduler(epoch, lr):
         return lr * 1 / 2
 
 
-callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
-epochs = 12
+epochs = 10
 batch_size = 256
 class_weights = class_weight.compute_class_weight(
     "balanced", np.unique(train.y), train.y
 )
 class_weights = {i: class_weights[i] for i in range(2)}
+callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
+auprc_callback = AUPRC((val.x, val.y), batch_size = batch_size)
+
 
 # training all models and save them thereafte
 for name, model in models.items():
@@ -64,7 +67,7 @@ for name, model in models.items():
         epochs=epochs,
         batch_size=batch_size,
         verbose=2,
-        callbacks=[callback],
+        callbacks=[callback, auprc_callback],
     )
 
     print("### saving trained model {} ###".format(name))
@@ -74,6 +77,8 @@ for name, model in models.items():
     predictions = predictions > 0.5
     print("### performance on valdiation set ###")
     utils.model_eval(predictions.reshape(-1), val.y)
+    results = model.evaluate(val.x, val.y, batch_size=256, verbose=2)
+    print("val loss, val auprc, val auroc:", results)
 
     if predictionOnTestingSet:
         # evaluating performance on given testing set
@@ -84,5 +89,7 @@ for name, model in models.items():
         predictions = predictions > 0.5
         print("### performance on testing set ###")
         utils.model_eval(predictions.reshape(-1), test.y)
+        results = model.evaluate(test.x, test.y, batch_size=256, verbose=2)
+        print("val loss, val auprc, val auroc:", results)
 
 print("### training completed ###")
