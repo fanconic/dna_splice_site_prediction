@@ -17,6 +17,9 @@ from sklearn.utils import class_weight
 from keras import backend as K
 from sklearn.model_selection import train_test_split
 
+np.random.seed(seed)
+tf.random.set_seed(seed)
+
 preprocess_transforms = [onehot_encode]
 
 if data == "humans":

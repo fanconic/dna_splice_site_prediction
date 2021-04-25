@@ -27,6 +27,8 @@ from src.data.loader import DataLoader_training, DataLoader_split
 from settings import *
 from src.utils.utils import save_model
 
+np.random.seed(seed)
+
 # loading and preprocessing training data
 preprocess_transforms = [onehot_encode]
 

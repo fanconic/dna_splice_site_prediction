@@ -28,10 +28,10 @@ from settings import *
 # loading and preprocessing testing data
 preprocess_transforms = [onehot_encode]
 
+np.random.seed(seed)
+
 if data == "humans":
-    loader = DataLoader_testing(
-        csv_file=celegans_seq, preprocess_X=preprocess_transforms
-    )
+    loader = DataLoader_testing(preprocess_X=preprocess_transforms)
     test_x = loader.x.copy()
 
 elif data == "celegans":

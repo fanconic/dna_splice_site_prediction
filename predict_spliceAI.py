@@ -10,19 +10,20 @@ from src.data.preprocessing import (
 from src.models.spliceai import SpliceAI400, SpliceAI80
 
 import src.data.utils as utils
-from src.data.loader import DataLoader_sk, DataLoader_split
+from src.data.loader import DataLoader_testing, DataLoader_split
 from settings import *
 from src.utils.utils import save_model
 from sklearn.utils import class_weight
 from keras import backend as K
 from sklearn.model_selection import train_test_split
 
+np.random.seed(seed)
+tf.random.set_seed(seed)
+
 # loading and preprocessing testing data
 preprocess_transforms = [onehot_encode]
 if data == "humans":
-    loader = DataLoader_testing(
-        csv_file=celegans_seq, preprocess_X=preprocess_transforms, flatten=False
-    )
+    loader = DataLoader_testing(preprocess_X=preprocess_transforms, flatten=False)
     test_x = loader.x.copy()
 
 elif data == "celegans":
