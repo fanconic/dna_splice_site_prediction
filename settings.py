@@ -11,6 +11,7 @@ username = getpass.getuser()
 if "COLAB_GPU" in os.environ:
     data_path = "/content/drive/MyDrive/datasets/ML4H_p2/exercise_data/"
     out_dir = "/content/drive/My Drive/datasets/ML4H_p2/"
+    results_dir = "/content/drive/My Drive/datasets/ML4H_p2/saved_output"
     colab = True
 
 # Personal Computer -> you might have to adjust the path
