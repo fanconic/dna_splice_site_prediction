@@ -33,7 +33,8 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 - `train_spliceAI.py`: train SpliceAI80 and SpliceAI400
 - `predict_spliceAI.py`: create predictions with SpliceAI80 and SpliceAI400
 - `settings.py`: Settings for paths, hyperparameters and variables (choose here 'humans' or 'celegans' sequences)
-- `run.sh`: Script to train the SpliceAI on Leonhard
+- `run.sh`: Script to train and predict the traditional models on Leonhard
+- `run_spliceAI.sh`: Script to train and predict the SpliceAI on Leonhard
 
 
 ### Repository Structure
@@ -44,8 +45,8 @@ The datasets have been provided to us via Moodle and is not publicly available. 
     ├── models              # All models used for our project   (incl. SpliceAI)
     └── utils               # additional helper functions (e.g. model saver and loader)
 (├── exercise_data)      # Splice Site Data (not in repository - insert here) 
-(├── results)            # prediction results (not in repository - created upon first run)
-(└── saved_output)       # Saved models (not in repository - created upon first run)
+(├── saved_outputs)      # prediction results (not in repository - created upon first run)
+(└── saved_models)       # Saved models (not in repository - created upon first run)
 ```
 
 ## Prediction Files

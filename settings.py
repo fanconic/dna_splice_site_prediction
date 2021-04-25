@@ -3,7 +3,7 @@ import getpass
 import tensorflow as tf
 from src.models.metrics import AUPRC
 
-data = "celegans"  # either 'humans' or 'celegans'
+data = "humans"  # either 'humans' or 'celegans'
 
 username = getpass.getuser()
 
@@ -16,8 +16,8 @@ if "COLAB_GPU" in os.environ:
 # Personal Computer -> you might have to adjust the path
 else:
     data_path = "./exercise_data/"
-    out_dir = "./saved_output/"
-    results_dir = "./results/"
+    out_dir = "./saved_models/"
+    results_dir = "./saved_output/"
     colab = False
 
 if not os.path.exists(out_dir):
@@ -60,5 +60,5 @@ seed = 42
 n_estimators = 200
 
 # SpliceAI
-epochs = 3
+epochs = 15
 batch_size = 256
