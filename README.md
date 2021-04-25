@@ -26,14 +26,26 @@ $ pip install -r requirements.txt
 The datasets have been provided to us via Moodle and is not publicly available. If you anyway would be interested in using it, please reach out to us in order to check if handing the data to you would be possible. The datasets originated from C. elegans (roundworm) and humans.
 
 ### Repository Structure
+
+- `train.py`: train all the traditional models
+- `predict.py`: create predictions with all the traditional models
+- `cross_validation.py`: cross validate the traditional models
+- `train_spliceAI.py`: train SpliceAI80 and SpliceAI400
+- `predict_spliceAI.py`: create predictions with SpliceAI80 and SpliceAI400
+- `settings.py`: Settings for paths, hyperparameters and variables (choose here 'humans' or 'celegans' sequences)
+- `run.sh`: Script to train the SpliceAI on Leonhard
+
+
+### Repository Structure
 ```
  .
  ├── src                 # Source code for the experiments
     ├── data                # Data loaders, preprocessing, helper functions
-    ├── models              # All models used for our project  
+    ├── models              # All models used for our project   (incl. SpliceAI)
     └── utils               # additional helper functions (e.g. model saver and loader)
 (├── exercise_data)      # Splice Site Data (not in repository - insert here) 
-(└── saved_output)       # Saved models (not in repository - created upon first run) & prediction results of "human_dna_test_hidden_split.csv"
+(├── results)            # prediction results (not in repository - created upon first run)
+(└── saved_output)       # Saved models (not in repository - created upon first run)
 ```
 
 ## Prediction Files
@@ -48,3 +60,4 @@ The trained models specified in the report and its predictions for the `human_dn
 ## References
 - https://www.sciencedirect.com/science/article/pii/S0092867418316295
 - https://www.sciencedirect.com/science/article/abs/pii/S095070511100089X
+- https://www.sciencedirect.com/science/article/pii/S0092867418316295

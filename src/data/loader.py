@@ -43,11 +43,6 @@ class DataLoader_folds:
             preprocess_X: list of preprocessing to be applyed on the data
         """
         self.dataset = pd.read_csv(csv_file)
-        if "C_elegans_acc_seq" in csv_file:
-            # sequences derived from C.elegans, so T instead of U
-            self.dataset["sequences"] = self.dataset["sequences"].apply(
-                lambda x: x.replace("T", "U")
-            )
 
         self.x = self.dataset["sequences"]
         if preprocess_X is not None:
@@ -75,13 +70,14 @@ class DataLoader_split:
         random_state=seed,
         preprocess_X=None,
         flatten=True,
+        augment=False,
     ):
         self.dataset = pd.read_csv(csv_file)
         self.x = self.dataset["sequences"]
         self.y = self.dataset["labels"]
         self.y = self.y.replace(-1, 0).values
 
-        if "C_elegans_acc_seq" in csv_file:
+        if "C_elegans_acc_seq" in csv_file and augment:
             self.x = "N" * 157 + self.x + "N" * 159
 
         self.test_size = test_size

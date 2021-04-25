@@ -14,7 +14,8 @@ from src.data.loader import DataLoader_sk, DataLoader_split
 from settings import *
 from src.utils.utils import save_model
 from sklearn.utils import class_weight
-
+from keras import backend as K
+from sklearn.model_selection import train_test_split
 
 preprocess_transforms = [onehot_encode]
 
@@ -24,17 +25,30 @@ if data == "humans":
         data_path + hum_seq_train, preprocess_X=preprocess_transforms, flatten=False
     )
     val_loader = DataLoader_sk(
-        data_path + hum_seq_val, preprocess_X=preprocess_transforms
+        data_path + hum_seq_val, preprocess_X=preprocess_transforms, flatten=False
+    )
+    test_loader = DataLoader_sk(
+        data_path + hum_seq_test,
+        shuffle=False,
+        preprocess_X=preprocess_transforms,
+        flatten=False,
     )
     X_train, y_train = train_loader.x, train_loader.y
     X_val, y_val = val_loader.x, val_loader.y
+    X_test, y_test = test_loader.x, test_loader.y
 
 elif data == "celegans":
     loader = DataLoader_split(
-        data_path + celegans_seq, preprocess_X=preprocess_transforms, flatten=False
+        data_path + celegans_seq,
+        preprocess_X=preprocess_transforms,
+        flatten=False,
+        augment=True,
     )
     X_train, y_train = loader.train_x, loader.train_y
-    X_val, y_val = loader.test_x, loader.test_y
+    X_test, y_test = loader.test_x, loader.test_y
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_train, y_train, random_state=seed, stratify=y_train
+    )
 
 else:
     print("data not available. Only 'humans' or 'celegans' DNA sequences.")
@@ -43,7 +57,7 @@ else:
 
 models = {
     "SpliceAI80": (SpliceAI80(), (157, -159), (1, 82, 4)),
-    "SpliceAI400": (SpliceAI400(), (0,399), (1, 398, 4)),
+    "SpliceAI400": (SpliceAI400(), (0, 399), (1, 398, 4)),
 }
 
 
@@ -68,7 +82,10 @@ for name, (model, (start, end), input_shape) in models.items():
         tf.keras.callbacks.LearningRateScheduler(scheduler),
         AUPRC((X_val[:, start:end, :], y_val), batch_size=batch_size),
         tf.keras.callbacks.ModelCheckpoint(
-            out_dir + name + ".hdf5", save_best_only=True, monitor="val_auc", mode="max"
+            out_dir + name + "_" + data + ".hdf5",
+            save_best_only=True,
+            monitor="val_auc",
+            mode="max",
         ),
     ]
 
@@ -77,7 +94,7 @@ for name, (model, (start, end), input_shape) in models.items():
     model.compile(
         loss="binary_crossentropy",
         optimizer=tf.keras.optimizers.Adam(lr=1e-3),
-        metrics=[tf.keras.metrics.AUC(curve="PR"), tf.keras.metrics.AUC(curve="ROC")],
+        metrics=[tf.keras.metrics.AUC(curve="PR")],
     )
 
     x = tf.random.normal(input_shape)
@@ -102,12 +119,11 @@ for name, (model, (start, end), input_shape) in models.items():
 
     if predictionOnTestingSet:
         # evaluating performance on given testing set
-        test = DataLoader_sk(
-            data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms
-        )
-        prediction_probas = model.predict(test.x[:, start:end, :])
+
+        prediction_probas = model.predict(X_test[:, start:end, :])
         predictions = prediction_probas > 0.5
         print("### performance on testing set ###")
-        utils.model_eval(predictions.reshape(-1), test.y, prediction_probas.reshape(-1))
+        utils.model_eval(predictions.reshape(-1), y_test, prediction_probas.reshape(-1))
 
+    K.clear_session()
 print("### training completed ###")

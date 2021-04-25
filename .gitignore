@@ -2,9 +2,11 @@
 project2_data
 saved_models
 saved_output
+results
 exercise_data
 lsf.*
 *.ipynb
+*.out
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

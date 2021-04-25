@@ -17,10 +17,14 @@ if "COLAB_GPU" in os.environ:
 else:
     data_path = "./exercise_data/"
     out_dir = "./saved_output/"
+    results_dir = "./results/"
     colab = False
 
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
+
+if not os.path.exists(results_dir):
+    os.makedirs(results_dir)
 
 # Dataset
 celegans_seq = "C_elegans_acc_seq.csv"
@@ -56,5 +60,5 @@ seed = 42
 n_estimators = 200
 
 # SpliceAI
-epochs = 15
+epochs = 3
 batch_size = 256

@@ -12,7 +12,7 @@ from src.data.preprocessing import (
     onehot_encode_kmers,
 )
 import src.data.utils as utils
-from src.data.loader import DataLoader_testing
+from src.data.loader import DataLoader_testing, DataLoader_split
 
 
 # Classifiers
@@ -22,33 +22,47 @@ from sklearn.svm import SVC
 import lightgbm
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
-
 from src.utils.utils import load_model
-
 from settings import *
+
+# loading and preprocessing testing data
+preprocess_transforms = [onehot_encode]
+
+if data == "humans":
+    loader = DataLoader_testing(
+        csv_file=celegans_seq, preprocess_X=preprocess_transforms
+    )
+    test_x = loader.x.copy()
+
+elif data == "celegans":
+    loader = DataLoader_split(
+        data_path + celegans_seq, preprocess_X=preprocess_transforms
+    )
+    test_x = loader.test_x.copy()
+
+else:
+    print("data not available. Only 'humans' or 'celegans' DNA sequences.")
+    exit()
 
 # models for testing (make sure the model name is exactly the same as in train.py)
 models = [
     # "K-Nearest Neighbours",
     "Logistic Regression",
-    # "Support Vector Machine",
-    # "Gradient Boosting",
-    # "MLP": MLPClassifier(),
+    "Linear Support Vector Machine",
+    "Support Vector Machine",
+    "Gradient Boosting",
+    "MLP",
     "Random Forest",
 ]
 
-# loading and preprocessing testing data
-preprocess_transforms = [onehot_encode]
-test = DataLoader_testing(csv_file=celegans_seq, preprocess_X=preprocess_transforms)
-
 for name in models:
     print("### loading model {} ###".format(name))
-    model = load_model(name)
+    model = load_model(name + "_" + data)
 
-    predictions = model.predict(test.x)
+    predictions = model.predict(test_x)
 
     # saving model predictions
-    with open(out_dir + name + "_results.npy", "wb") as file:
+    with open(results_dir + name + "_" + data + "_results.npy", "wb") as file:
         np.save(file, predictions)
     print("### predictions saved ###")
 

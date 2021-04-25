@@ -26,25 +26,39 @@ from src.utils.utils import save_model
 from settings import *
 
 preprocess_transforms = [onehot_encode]
-kfold_obj = DataLoader_folds(
-    data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
-)
+if data == "humans":
+    kfold_obj = DataLoader_folds(
+        data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
+    )
 
+elif data == "celegans":
+    kfold_obj = DataLoader_folds(
+        data_path + celegans_seq, n_folds, preprocess_X=preprocess_transforms
+    )
+
+else:
+    print("data not available. Only 'humans' or 'celegans' DNA sequences.")
+    exit()
 
 models = {
     # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
-    "Logistic Regression": LogisticRegression(class_weight="balanced"),
-    "Support Vector Machine": LinearSVC(class_weight="balanced"),
-    "Gradient Boosting": lightgbm.LGBMClassifier(
-        n_estimators=100, num_leaves=20, class_weight="balanced"
+    "Logistic Regression": (LogisticRegression(class_weight="balanced"), None, None),
+    "Linear Support Vector Machine": (LinearSVC(class_weight="balanced"), None, None),
+    "Support Vector Machine": (SVC(class_weight="balanced"), [under_sample], [1]),
+    "Gradient Boosting": (
+        lightgbm.LGBMClassifier(
+            n_estimators=100, num_leaves=20, class_weight="balanced"
+        ),
+        None,
+        None,
     ),
-    "MLP": MLPClassifier(),
-    "Random Forest": RandomForestClassifier(class_weight="balanced"),
+    "MLP": (MLPClassifier(), None, None),
+    "Random Forest": (RandomForestClassifier(class_weight="balanced"), None, None),
 }
 
 
 # K_Fold iteration loop
-for name, model in models.items():
+for name, (model, samplings, ratios) in models.items():
     print(name)
     roc_auc_collect = []
     auprc_collect = []
@@ -58,7 +72,9 @@ for name, model in models.items():
         test_y = kfold_obj.y[dev_idx]
 
         # sampling
-        # train_x, train_y = under_sample(train_x, train_y, 1)
+        if samplings is not None:
+            for sampling, ratio in zip(samplings, ratios):
+                train_x, train_y = sampling(train_x, train_y, ratio)
 
         # model training & testing
         model.fit(train_x, train_y)
@@ -72,8 +88,6 @@ for name, model in models.items():
         roc_auc, auprc = utils.model_eval(predictions, test_y, predict_probas)
         roc_auc_collect.append(roc_auc)
         auprc_collect.append(auprc)
-
-        save_model(model, name + "_fold_{}".format(fold + 1))
 
     print(
         "AUPRC score mean: {0:.4f}+-{1:.4f}\n".format(
