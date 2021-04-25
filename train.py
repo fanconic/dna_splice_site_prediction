@@ -95,9 +95,13 @@ for name, (model, samplings, ratios) in models.items():
     if predictionOnTestingSet:
         # evaluating performance on given testing set
         predictions = model.predict(test_x)
+        try:
+            predict_probas = model.predict_proba(test_x)[:, 1]
+        except:
+            predict_probas = model.decision_function(test_x)
 
         print("### performance on testing set ###")
-        utils.model_eval(predictions, test_y)
+        utils.model_eval(predictions, test_y, predict_probas)
 
 
 print("### training completed ###")
