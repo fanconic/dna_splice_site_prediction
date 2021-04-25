@@ -41,19 +41,25 @@ else:
     exit()
 
 models = {
-    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    "K-Nearest Neighbours": (
+        KNeighborsClassifier(n_neighbors=14, p=1),
+        [under_sample, smote_sampling],
+        [0.3, 1],
+    ),
     "Logistic Regression": (LogisticRegression(class_weight="balanced"), None, None),
     "Linear Support Vector Machine": (LinearSVC(class_weight="balanced"), None, None),
     "Support Vector Machine": (SVC(class_weight="balanced"), [under_sample], [1]),
     "Gradient Boosting": (
-        lightgbm.LGBMClassifier(
-            n_estimators=100, num_leaves=20, class_weight="balanced"
-        ),
-        None,
-        None,
+        lightgbm.LGBMClassifier(n_estimators=500, num_leaves=50, random_state=seed),
+        [under_sample, smote_sampling],
+        [0.5, 1],
     ),
-    "MLP": (MLPClassifier(), None, None),
-    "Random Forest": (RandomForestClassifier(class_weight="balanced"), None, None),
+    "MLP": (MLPClassifier(), [under_sample], [0.3]),
+    "Random Forest": (
+        RandomForestClassifier(n_estimators=700, max_features=50, random_state=seed),
+        [under_sample, smote_sampling],
+        [0.01, 1],
+    ),
 }
 
 

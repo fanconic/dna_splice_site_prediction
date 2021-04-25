@@ -43,18 +43,18 @@ if data == "humans":
         test_loader = DataLoader_sk(
             data_path + hum_seq_test, shuffle=False, preprocess_X=preprocess_transforms
         )
-        test_x = test_loader.x.copy()
-        test_y = test_loader.y.copy()
+        test_x = test_loader.x
+        test_y = test_loader.y
 
 elif data == "celegans":
     loader = DataLoader_split(
         data_path + celegans_seq,
         preprocess_X=preprocess_transforms,
     )
-    train_x = loader.train_x.copy()
-    train_y = loader.train_y.copy()
-    test_x = loader.test_x.copy()
-    test_y = loader.test_y.copy()
+    train_x = loader.train_x
+    train_y = loader.train_y
+    test_x = loader.test_x
+    test_y = loader.test_y
 
 else:
     print("data not available. Only 'humans' or 'celegans' DNA sequences.")
@@ -63,31 +63,38 @@ else:
 
 # defining the models with its hyperparameters derived from tuning
 models = {
-    # "K-Nearest Neighbours": KNeighborsClassifier(n_neighbors=n_neighbors),
+    #"K-Nearest Neighbours": (
+    #    KNeighborsClassifier(n_neighbors=14, p=1),
+    #    [under_sample, smote_sampling],
+    #    [0.3, 1],
+    #),
     "Logistic Regression": (LogisticRegression(class_weight="balanced"), None, None),
     "Linear Support Vector Machine": (LinearSVC(class_weight="balanced"), None, None),
     "Support Vector Machine": (SVC(class_weight="balanced"), [under_sample], [1]),
     "Gradient Boosting": (
-        lightgbm.LGBMClassifier(
-            n_estimators=100, num_leaves=20, class_weight="balanced"
-        ),
-        None,
-        None,
+        lightgbm.LGBMClassifier(n_estimators=500, num_leaves=50, random_state=seed),
+        [under_sample, smote_sampling],
+        [0.5, 1],
     ),
-    "MLP": (MLPClassifier(), None, None),
-    "Random Forest": (RandomForestClassifier(class_weight="balanced"), None, None),
+    "MLP": (MLPClassifier(), [under_sample], [0.3]),
+    "Random Forest": (
+        RandomForestClassifier(n_estimators=700, max_features=50, random_state=seed),
+        [under_sample, smote_sampling],
+        [0.1, 1],
+    ),
 }
 
 # training all models and save them thereafter
 for name, (model, samplings, ratios) in models.items():
-
     # sampling
     if samplings is not None:
         for sampling, ratio in zip(samplings, ratios):
-            train_x, train_y = sampling(train_x, train_y, ratio)
-
+            train_x_sampled, train_y_sampled = sampling(train_x, train_y, ratio)
+    else:
+        train_x_sampled, train_y_sampled = train_x, train_y
+        
     print("### fitting model {} ###".format(name))
-    model.fit(train_x, train_y)
+    model.fit(train_x_sampled, train_y_sampled)
 
     print("### saving trained model {} ###".format(name))
     save_model(model, name + "_" + data)
