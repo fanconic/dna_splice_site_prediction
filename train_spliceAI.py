@@ -115,6 +115,10 @@ for name, (model, (start, end), input_shape) in models.items():
         callbacks=[callbacks],
     )
 
+    # load best epoch:
+    model.load_weights(out_dir + name + "_" + data + ".hdf5")
+
+    # predict
     prediction_probas = model.predict(X_val[:, start:end, :])
     predictions = prediction_probas > 0.5
     print("### performance on valdiation set ###")
