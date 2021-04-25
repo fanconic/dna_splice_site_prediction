@@ -23,7 +23,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 import src.data.utils as utils
 from src.models.models import k_NN
-from src.data.loader import DataLoader_training, DataLoader_split
+from src.data.loader import DataLoader_training, DataLoader_split, DataLoader_sk
 from settings import *
 from src.utils.utils import save_model
 

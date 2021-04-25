@@ -37,7 +37,7 @@ hum_seq_val = "human_dna_validation_split.csv"
 n_folds = 3
 
 # Whether Predictions on testing set (see train.py) -> set to True only after everything has been finalized
-predictionOnTestingSet = False
+predictionOnTestingSet = True
 
 # Preprocessing
 under_sampling_perc = 0.5
