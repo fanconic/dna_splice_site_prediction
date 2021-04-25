@@ -35,7 +35,7 @@ if data == "humans":
     train_loader = DataLoader_training(preprocess_X=preprocess_transforms)
 
     train_x = train_loader.x.copy()
-    train_y = trtrain_loaderain.y.copy()
+    train_y = train_loader.y.copy()
 
     if predictionOnTestingSet:
         test_loader = DataLoader_sk(
