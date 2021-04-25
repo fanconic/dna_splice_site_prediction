@@ -71,6 +71,7 @@ class DataLoader_split:
         preprocess_X=None,
         flatten=True,
         augment=False,
+        save_test_df=False,
     ):
         self.dataset = pd.read_csv(csv_file)
         self.x = self.dataset["sequences"]
@@ -96,6 +97,13 @@ class DataLoader_split:
             self.train_x, self.test_x, self.train_y, self.test_y = train_test_split(
                 self.x, self.y, test_size=test_size, stratify=None, random_state=seed
             )
+
+        if save_test_df:
+            test_df = pd.DataFrame()
+            test_df["sequences"] = self.test_x
+            test_df["labels"] = self.test_y
+            test_df["labels"] = test_df["labels"].replace(0, -1)
+            test_df.to_csv("./exercise_data/C_elegans_test_seq.csv")
 
 
 class DataLoader_training:

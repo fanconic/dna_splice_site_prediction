@@ -48,8 +48,7 @@ if data == "humans":
 
 elif data == "celegans":
     loader = DataLoader_split(
-        data_path + celegans_seq,
-        preprocess_X=preprocess_transforms,
+        data_path + celegans_seq, preprocess_X=preprocess_transforms, save_test_df=False
     )
     train_x = loader.train_x
     train_y = loader.train_y
@@ -63,11 +62,11 @@ else:
 
 # defining the models with its hyperparameters derived from tuning
 models = {
-    #"K-Nearest Neighbours": (
-    #    KNeighborsClassifier(n_neighbors=14, p=1),
-    #    [under_sample, smote_sampling],
-    #    [0.3, 1],
-    #),
+    "K-Nearest Neighbours": (
+        KNeighborsClassifier(n_neighbors=14, p=1),
+        [under_sample],
+        [0.3],
+    ),
     "Logistic Regression": (LogisticRegression(class_weight="balanced"), None, None),
     "Linear Support Vector Machine": (LinearSVC(class_weight="balanced"), None, None),
     "Support Vector Machine": (SVC(class_weight="balanced"), [under_sample], [1]),
@@ -76,7 +75,16 @@ models = {
         [under_sample, smote_sampling],
         [0.5, 1],
     ),
-    "MLP": (MLPClassifier(), [under_sample], [0.3]),
+    "MLP": (
+        MLPClassifier(
+            hidden_layer_sizes=(1592,),
+            activation="tanh",
+            batch_size=200,
+            early_stopping=False,
+        ),
+        [under_sample],
+        [0.3],
+    ),
     "Random Forest": (
         RandomForestClassifier(n_estimators=700, max_features=50, random_state=seed),
         [under_sample, smote_sampling],
@@ -92,7 +100,7 @@ for name, (model, samplings, ratios) in models.items():
             train_x_sampled, train_y_sampled = sampling(train_x, train_y, ratio)
     else:
         train_x_sampled, train_y_sampled = train_x, train_y
-        
+
     print("### fitting model {} ###".format(name))
     model.fit(train_x_sampled, train_y_sampled)
 

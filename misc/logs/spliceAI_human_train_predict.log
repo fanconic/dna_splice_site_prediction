@@ -1,0 +1,322 @@
+Standard Training.
+2021-04-25 20:52:02.399730: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+preprocessing data...
+preprocessing data...
+preprocessing data...
+2021-04-25 20:52:39.028109: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-04-25 20:52:39.029444: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2021-04-25 20:52:39.101167: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:0c:00.0 name: GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.92GiB deviceMemoryBandwidth: 451.17GiB/s
+2021-04-25 20:52:39.101216: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-04-25 20:52:39.115128: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-04-25 20:52:39.115220: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-04-25 20:52:39.122648: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-04-25 20:52:39.129403: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-04-25 20:52:39.147809: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-04-25 20:52:39.153838: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-04-25 20:52:39.155211: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-04-25 20:52:39.161569: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-04-25 20:52:39.162114: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-04-25 20:52:39.162674: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-04-25 20:52:39.166234: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:0c:00.0 name: GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.92GiB deviceMemoryBandwidth: 451.17GiB/s
+2021-04-25 20:52:39.166265: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-04-25 20:52:39.166292: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-04-25 20:52:39.166313: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-04-25 20:52:39.166333: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-04-25 20:52:39.166353: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-04-25 20:52:39.166372: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-04-25 20:52:39.166390: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-04-25 20:52:39.166410: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-04-25 20:52:39.185775: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-04-25 20:52:39.186587: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-04-25 20:52:40.681405: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-04-25 20:52:40.681455: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2021-04-25 20:52:40.681467: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2021-04-25 20:52:40.703031: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10271 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:0c:00.0, compute capability: 6.1)
+/cluster/home/fanconic/.local/lib/python3.7/site-packages/sklearn/utils/validation.py:72: FutureWarning: Pass classes=[0 1], y=[0 0 0 ... 0 0 0] as keyword args. From version 1.0 (renaming of 0.25) passing these as positional arguments will result in an error
+  "will result in an error", FutureWarning)
+### fitting model SpliceAI80 ###
+2021-04-25 20:52:41.225206: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-04-25 20:52:41.830507: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-04-25 20:52:41.847647: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+Model: "splice_a_i80"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv1d (Conv1D)              multiple                  160       
+_________________________________________________________________
+conv1d_1 (Conv1D)            multiple                  1056      
+_________________________________________________________________
+conv1d_2 (Conv1D)            multiple                  1056      
+_________________________________________________________________
+conv1d_3 (Conv1D)            multiple                  33        
+_________________________________________________________________
+res_block (ResBlock)         multiple                  22848     
+_________________________________________________________________
+res_block_1 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_2 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_3 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+cropping1d (Cropping1D)      multiple                  0         
+=================================================================
+Total params: 93,697
+Trainable params: 93,185
+Non-trainable params: 512
+_________________________________________________________________
+None
+2021-04-25 20:52:47.181265: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-04-25 20:52:47.181940: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2199975000 Hz
+Epoch 1/15
+1954/1954 - 36s - loss: 0.3650 - auc: 0.0562 - val_loss: 0.3997 - val_auc: 0.0643
+val auprc:  0.0988256100984723
+Epoch 2/15
+1954/1954 - 30s - loss: 0.2954 - auc: 0.0812 - val_loss: 0.1349 - val_auc: 0.1230
+val auprc:  0.15000744219352602
+Epoch 3/15
+1954/1954 - 30s - loss: 0.2639 - auc: 0.1000 - val_loss: 0.1843 - val_auc: 0.1249
+val auprc:  0.12454636276551613
+Epoch 4/15
+1954/1954 - 30s - loss: 0.2474 - auc: 0.1183 - val_loss: 0.3938 - val_auc: 0.0722
+val auprc:  0.12154745451987325
+Epoch 5/15
+1954/1954 - 30s - loss: 0.2119 - auc: 0.1312 - val_loss: 0.1635 - val_auc: 0.1041
+val auprc:  0.13933761909702147
+Epoch 6/15
+1954/1954 - 30s - loss: 0.1828 - auc: 0.1332 - val_loss: 0.1543 - val_auc: 0.1224
+val auprc:  0.12337931934578343
+Epoch 7/15
+1954/1954 - 30s - loss: 0.1317 - auc: 0.1868 - val_loss: 0.1941 - val_auc: 0.1170
+val auprc:  0.1651097766315146
+Epoch 8/15
+1954/1954 - 30s - loss: 0.0891 - auc: 0.2146 - val_loss: 0.1112 - val_auc: 0.1386
+val auprc:  0.19968645149492614
+Epoch 9/15
+1954/1954 - 30s - loss: 0.0672 - auc: 0.2399 - val_loss: 0.0959 - val_auc: 0.1239
+val auprc:  0.18925324443785663
+Epoch 10/15
+1954/1954 - 30s - loss: 0.0553 - auc: 0.2526 - val_loss: 0.0925 - val_auc: 0.1255
+val auprc:  0.2005577281824172
+Epoch 11/15
+1954/1954 - 30s - loss: 0.0491 - auc: 0.2586 - val_loss: 0.0818 - val_auc: 0.1244
+val auprc:  0.1917493406685754
+Epoch 12/15
+1954/1954 - 30s - loss: 0.0463 - auc: 0.2678 - val_loss: 0.0802 - val_auc: 0.1242
+val auprc:  0.19161621117191066
+Epoch 13/15
+1954/1954 - 30s - loss: 0.0446 - auc: 0.2724 - val_loss: 0.0783 - val_auc: 0.1261
+val auprc:  0.1908061111482132
+Epoch 14/15
+1954/1954 - 30s - loss: 0.0437 - auc: 0.2761 - val_loss: 0.0771 - val_auc: 0.1270
+val auprc:  0.19022076586346856
+Epoch 15/15
+1954/1954 - 30s - loss: 0.0434 - auc: 0.2774 - val_loss: 0.0777 - val_auc: 0.1258
+val auprc:  0.19016057857458712
+### performance on valdiation set ###
+########### Precision : 0.0505, Recall: 0.8000, F1: 0.0950, AUROC: 0.9621, AUPRC: 0.1997 ###########
+### performance on testing set ###
+########### Precision : 0.0618, Recall: 0.7692, F1: 0.1144, AUROC: 0.9686, AUPRC: 0.1946 ###########
+### fitting model SpliceAI400 ###
+Model: "splice_a_i400"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv1d_12 (Conv1D)           multiple                  160       
+_________________________________________________________________
+conv1d_13 (Conv1D)           multiple                  1056      
+_________________________________________________________________
+conv1d_14 (Conv1D)           multiple                  1056      
+_________________________________________________________________
+conv1d_15 (Conv1D)           multiple                  1056      
+_________________________________________________________________
+conv1d_16 (Conv1D)           multiple                  33        
+_________________________________________________________________
+res_block_4 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_5 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_6 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_7 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_8 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_9 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_10 (ResBlock)      multiple                  22848     
+_________________________________________________________________
+res_block_11 (ResBlock)      multiple                  22848     
+_________________________________________________________________
+cropping1d_1 (Cropping1D)    multiple                  0         
+=================================================================
+Total params: 186,145
+Trainable params: 185,121
+Non-trainable params: 1,024
+_________________________________________________________________
+None
+Epoch 1/15
+1954/1954 - 140s - loss: 0.4018 - auc: 0.0440 - val_loss: 0.5819 - val_auc: 0.0511
+val auprc:  0.06941701365130902
+Epoch 2/15
+1954/1954 - 133s - loss: 0.2859 - auc: 0.0870 - val_loss: 0.2335 - val_auc: 0.1248
+val auprc:  0.16331444046281407
+Epoch 3/15
+1954/1954 - 134s - loss: 0.2590 - auc: 0.1287 - val_loss: 0.1287 - val_auc: 0.1669
+val auprc:  0.20985929713116552
+Epoch 4/15
+1954/1954 - 133s - loss: 0.2269 - auc: 0.1740 - val_loss: 0.2798 - val_auc: 0.0836
+val auprc:  0.16270963986095394
+Epoch 5/15
+1954/1954 - 133s - loss: 0.1955 - auc: 0.1892 - val_loss: 0.1512 - val_auc: 0.1365
+val auprc:  0.16273870361307424
+Epoch 6/15
+1954/1954 - 133s - loss: 0.1658 - auc: 0.2129 - val_loss: 0.1533 - val_auc: 0.2004
+val auprc:  0.21245938061369393
+Epoch 7/15
+1954/1954 - 133s - loss: 0.0977 - auc: 0.2989 - val_loss: 0.0980 - val_auc: 0.2140
+val auprc:  0.3064097166729729
+Epoch 8/15
+1954/1954 - 133s - loss: 0.0533 - auc: 0.3762 - val_loss: 0.0657 - val_auc: 0.2240
+val auprc:  0.3024302980519644
+Epoch 9/15
+1954/1954 - 133s - loss: 0.0353 - auc: 0.4445 - val_loss: 0.0497 - val_auc: 0.2110
+val auprc:  0.3156798683518831
+Epoch 10/15
+1954/1954 - 133s - loss: 0.0248 - auc: 0.5019 - val_loss: 0.0429 - val_auc: 0.2193
+val auprc:  0.3273404657014003
+Epoch 11/15
+1954/1954 - 133s - loss: 0.0200 - auc: 0.5273 - val_loss: 0.0357 - val_auc: 0.2319
+val auprc:  0.3307189602555546
+Epoch 12/15
+1954/1954 - 133s - loss: 0.0174 - auc: 0.5537 - val_loss: 0.0367 - val_auc: 0.2344
+val auprc:  0.3279778476038348
+Epoch 13/15
+1954/1954 - 133s - loss: 0.0159 - auc: 0.5732 - val_loss: 0.0331 - val_auc: 0.2304
+val auprc:  0.32844909063223343
+Epoch 14/15
+1954/1954 - 133s - loss: 0.0152 - auc: 0.5795 - val_loss: 0.0334 - val_auc: 0.2291
+val auprc:  0.3286271527894993
+Epoch 15/15
+1954/1954 - 133s - loss: 0.0149 - auc: 0.5823 - val_loss: 0.0335 - val_auc: 0.2290
+val auprc:  0.3278603232927892
+### performance on valdiation set ###
+########### Precision : 0.1487, Recall: 0.6000, F1: 0.2383, AUROC: 0.9733, AUPRC: 0.3280 ###########
+### performance on testing set ###
+########### Precision : 0.2185, Recall: 0.6827, F1: 0.3310, AUROC: 0.9759, AUPRC: 0.4357 ###########
+### training completed ###
+2021-04-25 21:36:30.244917: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+preprocessing data...
+2021-04-25 21:36:36.078262: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-04-25 21:36:36.079875: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2021-04-25 21:36:36.152194: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:0c:00.0 name: GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.92GiB deviceMemoryBandwidth: 451.17GiB/s
+2021-04-25 21:36:36.152260: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-04-25 21:36:36.157868: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-04-25 21:36:36.157938: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-04-25 21:36:36.160386: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-04-25 21:36:36.161195: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-04-25 21:36:36.166373: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-04-25 21:36:36.167830: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-04-25 21:36:36.168341: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-04-25 21:36:36.175002: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-04-25 21:36:36.175540: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-04-25 21:36:36.176379: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2021-04-25 21:36:36.178371: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:0c:00.0 name: GeForce GTX 1080 Ti computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 28 deviceMemorySize: 10.92GiB deviceMemoryBandwidth: 451.17GiB/s
+2021-04-25 21:36:36.178407: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-04-25 21:36:36.178435: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-04-25 21:36:36.178460: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-04-25 21:36:36.178484: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2021-04-25 21:36:36.178509: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2021-04-25 21:36:36.178533: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2021-04-25 21:36:36.178557: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2021-04-25 21:36:36.178581: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2021-04-25 21:36:36.193128: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2021-04-25 21:36:36.193210: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2021-04-25 21:36:37.136844: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-04-25 21:36:37.136899: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2021-04-25 21:36:37.136910: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2021-04-25 21:36:37.145038: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10271 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:0c:00.0, compute capability: 6.1)
+### loading model SpliceAI80 ###
+2021-04-25 21:36:37.527350: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2021-04-25 21:36:37.877437: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2021-04-25 21:36:37.886831: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+Model: "splice_a_i80"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv1d (Conv1D)              multiple                  160       
+_________________________________________________________________
+conv1d_1 (Conv1D)            multiple                  1056      
+_________________________________________________________________
+conv1d_2 (Conv1D)            multiple                  1056      
+_________________________________________________________________
+conv1d_3 (Conv1D)            multiple                  33        
+_________________________________________________________________
+res_block (ResBlock)         multiple                  22848     
+_________________________________________________________________
+res_block_1 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_2 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_3 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+cropping1d (Cropping1D)      multiple                  0         
+=================================================================
+Total params: 93,697
+Trainable params: 93,185
+Non-trainable params: 512
+_________________________________________________________________
+None
+2021-04-25 21:36:39.612992: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2021-04-25 21:36:39.613573: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2199975000 Hz
+### predictions saved ###
+### loading model SpliceAI400 ###
+Model: "splice_a_i400"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv1d_12 (Conv1D)           multiple                  160       
+_________________________________________________________________
+conv1d_13 (Conv1D)           multiple                  1056      
+_________________________________________________________________
+conv1d_14 (Conv1D)           multiple                  1056      
+_________________________________________________________________
+conv1d_15 (Conv1D)           multiple                  1056      
+_________________________________________________________________
+conv1d_16 (Conv1D)           multiple                  33        
+_________________________________________________________________
+res_block_4 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_5 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_6 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_7 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_8 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_9 (ResBlock)       multiple                  22848     
+_________________________________________________________________
+res_block_10 (ResBlock)      multiple                  22848     
+_________________________________________________________________
+res_block_11 (ResBlock)      multiple                  22848     
+_________________________________________________________________
+cropping1d_1 (Cropping1D)    multiple                  0         
+=================================================================
+Total params: 186,145
+Trainable params: 185,121
+Non-trainable params: 1,024
+_________________________________________________________________
+None
+### predictions saved ###
+### process completed ###
+Script completed!

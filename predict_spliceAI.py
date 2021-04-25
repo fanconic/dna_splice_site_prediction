@@ -65,6 +65,8 @@ for name, (model, (start, end), input_shape) in models.items():
     # saving model predictions
     with open(results_dir + name + "_" + data + "_results.npy", "wb") as file:
         np.save(file, predictions)
+    with open(results_dir + name + "_" + data + "_probas.npy", "wb") as file:
+        np.save(file, prediction_probas)
     print("### predictions saved ###")
 
 print("### process completed ###")

@@ -46,7 +46,7 @@ else:
 
 # models for testing (make sure the model name is exactly the same as in train.py)
 models = [
-    # "K-Nearest Neighbours",
+    "K-Nearest Neighbours",
     "Logistic Regression",
     "Linear Support Vector Machine",
     "Support Vector Machine",
@@ -60,10 +60,16 @@ for name in models:
     model = load_model(name + "_" + data)
 
     predictions = model.predict(test_x)
+    try:
+        predict_probas = model.predict_proba(test_x)[:, 1]
+    except:
+        predict_probas = model.decision_function(test_x)
 
     # saving model predictions
     with open(results_dir + name + "_" + data + "_results.npy", "wb") as file:
         np.save(file, predictions)
+    with open(results_dir + name + "_" + data + "_probas.npy", "wb") as file:
+        np.save(file, predict_probas)
     print("### predictions saved ###")
 
 print("### process completed ###")

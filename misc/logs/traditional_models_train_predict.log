@@ -1,0 +1,54 @@
+Standard Training.
+2021-04-25 22:53:11.138968: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+/cluster/apps/python/3.7.1/x86_64/lib64/python3.7/site-packages/dask/config.py:168: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(f.read()) or {}
+preprocessing data...
+### fitting model K-Nearest Neighbours ###
+### saving trained model K-Nearest Neighbours ###
+### performance on testing set ###
+########### Precision : 0.6512, Recall: 0.7000, F1: 0.6747, AUROC: 0.9210, AUPRC: 0.7413 ###########
+### fitting model Logistic Regression ###
+### saving trained model Logistic Regression ###
+### performance on testing set ###
+########### Precision : 0.6863, Recall: 0.8750, F1: 0.7692, AUROC: 0.9798, AUPRC: 0.8492 ###########
+### fitting model Linear Support Vector Machine ###
+### saving trained model Linear Support Vector Machine ###
+### performance on testing set ###
+########### Precision : 0.6596, Recall: 0.7750, F1: 0.7126, AUROC: 0.9669, AUPRC: 0.7796 ###########
+### fitting model Support Vector Machine ###
+### saving trained model Support Vector Machine ###
+### performance on testing set ###
+########### Precision : 0.4524, Recall: 0.9500, F1: 0.6129, AUROC: 0.9819, AUPRC: 0.8867 ###########
+### fitting model Gradient Boosting ###
+### saving trained model Gradient Boosting ###
+### performance on testing set ###
+########### Precision : 0.8421, Recall: 0.8000, F1: 0.8205, AUROC: 0.9851, AUPRC: 0.9181 ###########
+### fitting model MLP ###
+### saving trained model MLP ###
+### performance on testing set ###
+########### Precision : 0.6538, Recall: 0.8500, F1: 0.7391, AUROC: 0.9741, AUPRC: 0.8129 ###########
+### fitting model Random Forest ###
+### saving trained model Random Forest ###
+### performance on testing set ###
+########### Precision : 0.8333, Recall: 0.6250, F1: 0.7143, AUROC: 0.9765, AUPRC: 0.8484 ###########
+### training completed ###
+2021-04-25 22:53:45.581863: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+/cluster/apps/python/3.7.1/x86_64/lib64/python3.7/site-packages/dask/config.py:168: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(f.read()) or {}
+preprocessing data...
+### loading model K-Nearest Neighbours ###
+### predictions saved ###
+### loading model Logistic Regression ###
+### predictions saved ###
+### loading model Linear Support Vector Machine ###
+### predictions saved ###
+### loading model Support Vector Machine ###
+### predictions saved ###
+### loading model Gradient Boosting ###
+### predictions saved ###
+### loading model MLP ###
+### predictions saved ###
+### loading model Random Forest ###
+### predictions saved ###
+### process completed ###
+Script completed!

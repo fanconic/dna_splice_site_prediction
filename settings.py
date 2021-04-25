@@ -1,9 +1,8 @@
 import os
 import getpass
-import tensorflow as tf
 from src.models.metrics import AUPRC
 
-data = "humans"  # either 'humans' or 'celegans'
+data = "celegans"  # either 'humans' or 'celegans'
 
 username = getpass.getuser()
 
