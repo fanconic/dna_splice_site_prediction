@@ -11,7 +11,7 @@ from src.data.preprocessing import (
     onehot_encode_kmers,
 )
 import src.data.utils as utils
-from src.data.loader import DataLoader_testing, DataLoader_split
+from src.data.loader import DataLoader_testing, DataLoader_split, DataLoader_sk
 
 
 # Classifiers
@@ -33,6 +33,17 @@ np.random.seed(seed)
 if data == "humans":
     loader = DataLoader_testing(preprocess_X=preprocess_transforms)
     test_x = loader.x.copy()
+
+    """
+    test_loader = DataLoader_sk(
+        data_path + hum_seq_test,
+        shuffle=False,
+        preprocess_X=preprocess_transforms,
+        flatten=True,
+    )
+    test_x = test_loader.x
+    """
+
 
 elif data == "celegans":
     loader = DataLoader_split(

@@ -10,7 +10,7 @@ from src.data.preprocessing import (
 from src.models.spliceai import SpliceAI400, SpliceAI80
 
 import src.data.utils as utils
-from src.data.loader import DataLoader_testing, DataLoader_split
+from src.data.loader import DataLoader_testing, DataLoader_split, DataLoader_sk
 from settings import *
 from src.utils.utils import save_model
 from sklearn.utils import class_weight
@@ -23,8 +23,20 @@ tf.random.set_seed(seed)
 # loading and preprocessing testing data
 preprocess_transforms = [onehot_encode]
 if data == "humans":
-    loader = DataLoader_testing(preprocess_X=preprocess_transforms, flatten=False)
-    test_x = loader.x.copy()
+    hidden_loader = DataLoader_testing(
+        preprocess_X=preprocess_transforms, flatten=False
+    )
+    test_x = hidden_loader.x.copy()
+
+    """
+    test_loader = DataLoader_sk(
+        data_path + hum_seq_test,
+        shuffle=False,
+        preprocess_X=preprocess_transforms,
+        flatten=False,
+    )
+    test_x = test_loader.x
+    """
 
 elif data == "celegans":
     loader = DataLoader_split(

@@ -2,9 +2,11 @@ import os
 import getpass
 from src.models.metrics import AUPRC
 
-data = "celegans"  # either 'humans' or 'celegans'
+data = "humans"  # either 'humans' or 'celegans'
 
 username = getpass.getuser()
+
+seed = 42
 
 # Google Colab
 if "COLAB_GPU" in os.environ:
