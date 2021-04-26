@@ -28,7 +28,7 @@ We suggest to create a virtual environment and install the required packages.
 ```bash
 $ conda create -n test_env
 $ conda activate test_env
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 ### Dataset
