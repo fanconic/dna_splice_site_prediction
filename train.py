@@ -1,7 +1,5 @@
-import torch
 import numpy as np
 import pandas as pd
-import torch.utils.data as data
 
 from settings import data_path, celegans_seq
 from src.data.preprocessing import (
