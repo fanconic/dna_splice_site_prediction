@@ -166,14 +166,13 @@ class DataLoader_testing:
     """DataLoader for final testing with trained models"""
 
     def __init__(self, csv_file=hum_seq_hidden, preprocess_X=None, flatten=True):
-                """Initialize dataloader for final training with best hyperparameters (see report)
+        """Initialize dataloader for final training with best hyperparameters (see report)
         Args:
             csv_file (default hum_seq_hidden): path of the testing csv file
             preprocess_X: list of preprocessing to be applyed on the data
             flatten (default True): whether transformation during preprocessing should be flattened
         """
         self.dataset = pd.read_csv(data_path + csv_file)
-
         self.x = self.dataset["sequences"]
         if preprocess_X is not None:
             print("preprocessing data...")
