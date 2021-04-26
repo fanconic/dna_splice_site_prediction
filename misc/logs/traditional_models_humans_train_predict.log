@@ -1,0 +1,60 @@
+Standard Training.
+2021-04-25 21:10:19.901300: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+/cluster/apps/python/3.7.1/x86_64/lib64/python3.7/site-packages/dask/config.py:168: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(f.read()) or {}
+preprocessing data...
+preprocessing data...
+### fitting model K-Nearest Neighbours ###
+### saving trained model K-Nearest Neighbours ###
+### performance on testing set ###
+########### Precision : 0.0091, Recall: 0.8365, F1: 0.0181, AUROC: 0.8509, AUPRC: 0.0430 ###########
+### fitting model Linear Support Vector Machine ###
+/cluster/home/fanconic/.local/lib/python3.7/site-packages/sklearn/svm/_base.py:986: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
+### saving trained model Linear Support Vector Machine ###
+### performance on testing set ###
+########### Precision : 0.2632, Recall: 0.0481, F1: 0.0813, AUROC: 0.9406, AUPRC: 0.1103 ###########
+### fitting model Support Vector Machine ###
+### saving trained model Support Vector Machine ###
+### performance on testing set ###
+########### Precision : 0.0206, Recall: 0.9231, F1: 0.0403, AUROC: 0.9533, AUPRC: 0.0709 ###########
+### fitting model Gradient Boosting ###
+### saving trained model Gradient Boosting ###
+### performance on testing set ###
+########### Precision : 0.4000, Recall: 0.0192, F1: 0.0367, AUROC: 0.9595, AUPRC: 0.1519 ###########
+### fitting model MLP ###
+### saving trained model MLP ###
+### performance on testing set ###
+########### Precision : 0.0354, Recall: 0.7019, F1: 0.0673, AUROC: 0.9358, AUPRC: 0.1006 ###########
+### fitting model MLP ###
+### saving trained model MLP ###
+### performance on testing set ###
+########### Precision : 0.0308, Recall: 0.7115, F1: 0.0591, AUROC: 0.9238, AUPRC: 0.0821 ###########
+### fitting model Random Forest ###
+### saving trained model Random Forest ###
+### performance on testing set ###
+/cluster/home/fanconic/.local/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1245: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+########### Precision : 0.0000, Recall: 0.0000, F1: 0.0000, AUROC: 0.9472, AUPRC: 0.1536 ###########
+
+### training completed ###
+2021-04-26 04:35:24.102438: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+/cluster/apps/python/3.7.1/x86_64/lib64/python3.7/site-packages/dask/config.py:168: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  data = yaml.load(f.read()) or {}
+preprocessing data...
+### loading model K-Nearest Neighbours ###
+### predictions saved ###
+### loading model Logistic Regression ###
+### predictions saved ###
+### loading model Linear Support Vector Machine ###
+### predictions saved ###
+### loading model Support Vector Machine ###
+### predictions saved ###
+### loading model Gradient Boosting ###
+### predictions saved ###
+### loading model MLP ###
+### predictions saved ###
+### loading model Random Forest ###
+### predictions saved ###
+### process completed ###
+Script completed!
