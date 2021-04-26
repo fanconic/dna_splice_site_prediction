@@ -30,6 +30,7 @@ preprocess_transforms = [onehot_encode]
 
 np.random.seed(seed)
 
+# differentiating among datasets
 if data == "humans":
     loader = DataLoader_testing(preprocess_X=preprocess_transforms)
     test_x = loader.x.copy()

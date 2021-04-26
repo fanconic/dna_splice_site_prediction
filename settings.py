@@ -45,20 +45,6 @@ over_sampling_perc = 0.2
 smote_strategy = None  # None for balanced
 onehot = True
 
-# k-NN
-n_neighbors = 3
-
-# Logistic Regression
-
-# Boosting
-
-# SVM
-
-# Random Forest
-max_depth = 10
-seed = 42
-n_estimators = 200
-
 # SpliceAI
 epochs = 15
 batch_size = 256

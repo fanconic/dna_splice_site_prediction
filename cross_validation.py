@@ -25,7 +25,10 @@ from src.utils.utils import save_model
 # import all the settings variables for the models
 from settings import *
 
+# preprocessing
 preprocess_transforms = [onehot_encode]
+
+# differentiating among datasets
 if data == "humans":
     kfold_obj = DataLoader_folds(
         data_path + hum_seq_train, n_folds, preprocess_X=preprocess_transforms
@@ -40,6 +43,7 @@ else:
     print("data not available. Only 'humans' or 'celegans' DNA sequences.")
     exit()
 
+# model specification for cross-validation (incl. sampling steps)
 models = {
     "K-Nearest Neighbours": (
         KNeighborsClassifier(n_neighbors=14, p=1),

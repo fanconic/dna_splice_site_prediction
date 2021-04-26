@@ -8,7 +8,13 @@ class DataLoader_sk:
     """DataLoader for sklearn"""
 
     def __init__(self, csv_file, shuffle=True, preprocess_X=None, flatten=True):
-
+        """Initialize dataloader
+        Args:
+            csv_file: path of the csv_file
+            shuffle (default True): Shuffle dataset
+            preprocess_X: list of preprocessing to be applyed on the data
+            flatten (default True): whether transformation during preprocessing should be flattened
+        """
         self.dataset = pd.read_csv(csv_file)
         self.shuffle = shuffle
         if self.shuffle:
@@ -60,7 +66,7 @@ class DataLoader_folds:
 
 
 class DataLoader_split:
-    """DataLoader to generate stratified training and test split"""
+    """DataLoader to generate training and test split"""
 
     def __init__(
         self,
@@ -73,6 +79,17 @@ class DataLoader_split:
         augment=False,
         save_test_df=False,
     ):
+        """Initialize dataloader for generating stratified train & test split
+        Args:
+            csv_file: path of the csv_file
+            test_size: fraction of dataset to be in testing set
+            doStratify (default True): Whether the split should be stratified or not
+            random_state: fixing seed for split
+            preprocess_X: list of preprocessing to be applyed on the data
+            flatten (default True): whether transformation during preprocessing should be flattened
+            augment (default False): whether to augment the sequence size or not
+            save_test_df (default False): whether to save the test dataset or not
+        """
         self.dataset = pd.read_csv(csv_file)
         self.x = self.dataset["sequences"]
         self.y = self.dataset["labels"]
@@ -117,7 +134,15 @@ class DataLoader_training:
         preprocess_X=None,
         flatten=True,
     ):
-
+        """Initialize dataloader for final training with best hyperparameters (see report)
+        Args:
+            csv_file_1 (default hum_seq_train): path of the first csv file
+            csv_file_2 (default hum_seq_val): path of the second csv file
+            shuflle (default True): Shuffle dataset
+            test_size: fraction of dataset to be in testing set
+            preprocess_X: list of preprocessing to be applyed on the data
+            flatten (default True): whether transformation during preprocessing should be flattened
+        """
         self.dataset_1 = pd.read_csv(data_path + csv_file_1)
         self.dataset_2 = pd.read_csv(data_path + csv_file_2)
 
@@ -141,7 +166,12 @@ class DataLoader_testing:
     """DataLoader for final testing with trained models"""
 
     def __init__(self, csv_file=hum_seq_hidden, preprocess_X=None, flatten=True):
-
+                """Initialize dataloader for final training with best hyperparameters (see report)
+        Args:
+            csv_file (default hum_seq_hidden): path of the testing csv file
+            preprocess_X: list of preprocessing to be applyed on the data
+            flatten (default True): whether transformation during preprocessing should be flattened
+        """
         self.dataset = pd.read_csv(data_path + csv_file)
 
         self.x = self.dataset["sequences"]

@@ -32,6 +32,7 @@ np.random.seed(seed)
 # loading and preprocessing training data
 preprocess_transforms = [onehot_encode]
 
+# differentiating among datasets
 if data == "humans":
     # loading and preprocessing training data
     train_loader = DataLoader_training(preprocess_X=preprocess_transforms)
@@ -60,7 +61,7 @@ else:
     exit()
 
 
-# defining the models with its hyperparameters derived from tuning
+# defining the models with its hyperparameters derived from tuning (see report for details)
 models = {
     "K-Nearest Neighbours": (
         KNeighborsClassifier(n_neighbors=14, p=1),
