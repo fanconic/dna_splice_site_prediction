@@ -12,6 +12,9 @@ Splice80 and Splice400            | Residual Block
 <img src="./misc/spliceai.png" width="150"/> | <img src="./misc/resblock.png" width="100"/>
 
 
+## Submission Files
+The trained models specified in the report and the prediction files of the best-performing models for the Human and C.elegans test sequences can be found on GitLab via the following link: [GitLab](https://gitlab.ethz.ch/manstude/ml4h_project_2).
+
 ## Setup
 
 ### Installation
@@ -56,10 +59,6 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 - `sample_hyperparameter_tuning.py`: Sample file for hyperparameter tuning
 - `run.sh`: Script to train and predict the traditional models on Leonhard
 - `run_spliceAI.sh`: Script to train and predict the SpliceAI on Leonhard
-
-
-## Submission Files
-The trained models specified in the report and the prediction files of the best-performing models for the Human and C.elegans test sequences can be found on GitLab via the following link: [GitLab](https://gitlab.ethz.ch/manstude/ml4h_project_2).
 
 
 ## Contributors
