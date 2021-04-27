@@ -13,7 +13,7 @@ Splice80 and Splice400            | Residual Block
 
 
 ## Submission Files
-The trained models specified in the report and the prediction files of the best-performing models for the Human and C.elegans test sequences can be found on GitLab via the following link: [GitLab](https://gitlab.ethz.ch/manstude/ml4h_project_2).
+The trained models specified in the report and their predictions files for the Human and C.elegans test sequence datasets can be found on GitLab via the following link: [GitLab](https://gitlab.ethz.ch/manstude/ml4h_project_2).
 
 ## Setup
 
