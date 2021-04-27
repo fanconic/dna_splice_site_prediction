@@ -49,10 +49,10 @@ def print_results(models, ground_truth, df_preds):
         precision, recall, _ = precision_recall_curve(ground_truth, predict_probas)
 
         # here are the x, y scores for the AUROC
-        tpr, fpr, _ = roc_curve(ground_truth, predict_probas)
+        fpr, tpr, _ = roc_curve(ground_truth, predict_probas)
 
         auprc_score = auc(recall, precision)
-        auroc_score = auc(tpr, fpr)
+        auroc_score = auc(fpr, tpr)
 
         auprc_score_alt = average_precision_score(ground_truth, predict_probas)
         auroc_score_alt = roc_auc_score(ground_truth, predict_probas)
