@@ -56,7 +56,7 @@ The datasets have been provided to us via Moodle and is not publicly available. 
 - `predict_spliceAI.py`: create predictions with SpliceAI80 and SpliceAI400
 - `settings.py`: Settings for paths, hyperparameters and variables (choose here 'humans' or 'celegans' sequences)
 - `generate_output.py`: Generate the output in .csv format
-- `calculate_auprc_auroc.py`: Caluclates the AUPRC and AUROC for every model from the saved predictions
+- `calculate_auprc_auroc.py`: Calculates the AUPRC and AUROC for every model from the saved predictions
 - `sample_hyperparameter_tuning.py`: Sample file for hyperparameter tuning
 - `run.sh`: Script to train and predict the traditional models on Leonhard
 - `run_spliceAI.sh`: Script to train and predict the SpliceAI on Leonhard
